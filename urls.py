@@ -5,6 +5,7 @@ from mezzanine.core.views import direct_to_template
 
 import local_settings
 
+
 admin.autodiscover()
 
 # Add the urlpatterns for any custom Django applications here.
@@ -12,6 +13,9 @@ admin.autodiscover()
 # to the project's homepage.
 
 urlpatterns = patterns("",
+
+    url(r'^signin$', direct_to_template, {'template': 'signin/signin.html'}, name='signin'),
+    url(r'^login$', 'auth.views.signin'),
 
     (r'^static/(?P<path>.*)$',
      'django.views.static.serve',
