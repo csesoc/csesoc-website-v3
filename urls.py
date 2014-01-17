@@ -27,6 +27,11 @@ urlpatterns = patterns("",
     url(r'^zlogout$', 'auth.views.signout'),
 
     ("^pagedown/", include(mezzanine_pagedown.urls)),
+    url(r'^join_a_team$', 'teams.views.join_a_team'),
+    #    direct_to_template,
+    #        {'template': 'teams/teams.html'},
+    #        name='teams'
+    #        ),
 
     (r'^static/(?P<path>.*)$',
      'django.views.static.serve',
@@ -107,5 +112,5 @@ urlpatterns = patterns("",
 
 # Adds ``STATIC_URL`` to the context of error pages, so that error
 # pages can use JS, CSS and images.
-handler404 = "mezzanine.core.views.page_not_found"
-handler500 = "mezzanine.core.views.server_error"
+handler404 = "errors.views.page_not_found"
+handler500 = "errors.views.server_error"
