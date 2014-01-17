@@ -12,17 +12,23 @@ admin.autodiscover()
 # You can also change the ``home`` view to add your own functionality
 # to the project's homepage.
 
-urlpatterns = patterns("",
+urlpatterns = patterns(
+    "",
 
-    url(r'^signin$', direct_to_template, {'template': 'signin/signin.html'}, name='signin'),
-    url(r'^login$', 'auth.views.signin'),
+    # Login for zIDs, NOT admin. This is only a temporary solution
+    # because later, CSESoc's execs will be given admin permission
+    # and will need to auth via LDAP too.
+    url(r'^signin$', direct_to_template,
+        {'template': 'auth/login.html'},
+        name='signin'
+        ),
+    url(r'^zlogin$', 'auth.views.signin'),
+    url(r'^zlogout$', 'auth.views.signout'),
 
     (r'^static/(?P<path>.*)$',
      'django.views.static.serve',
-     {'document_root':
-         local_settings.STATIC_ROOT.rstrip('/')
-     }
-    ),
+     {'document_root': local_settings.STATIC_ROOT.rstrip('/')}
+     ),
 
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
