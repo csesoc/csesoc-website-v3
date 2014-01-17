@@ -144,7 +144,7 @@ TEMPLATE_LOADERS = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    #"mezzanine.core.auth_backends.MezzanineBackend",
+    "mezzanine.core.auth_backends.MezzanineBackend",
     'auth.ldap_auth.ldapBackend',
 )
 
