@@ -129,7 +129,7 @@ ul.dropdown li:hover {
     position: relative;
 }
 
-.nav-dropdown { 
+.nav-dropdown {
     width: 100%;
     min-width: 11rem;
     visibility: hidden;
@@ -290,7 +290,7 @@ ul.dropdown ul li a {
 }
 
 .ham-submenu li {
-    background: inherit !important; 
+    background: inherit !important;
 }
 
 .ham-submenu li:hover {
@@ -588,4 +588,25 @@ strong, b {
 #sponsors img {
     height: 3rem;
     padding-right: 1rem;
+}
+
+/* Teams page */
+.team {
+    position: relative;
+    line-height: 25px;
+    padding-bottom: 30px;
+    width: 100%;
+    min-height: 80px;
+}
+
+.team > .team-button {
+    position: absolute;
+    display: inline-block;
+    width: 149px;
+}
+
+.team > .team-description {
+    margin-left: 149px;
+    display: inline-block;
+    width: 80%;
 }

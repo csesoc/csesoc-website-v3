@@ -141,9 +141,8 @@ INTERNAL_IPS = ("127.0.0.1",)
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'jinja2_for_django.loader.Loader',
-#    "django.template.loaders.filesystem.Loader",
-#    "django.template.loaders.app_directories.Loader",
+    "django.template.loaders.filesystem.Loader",
+    "django.template.loaders.app_directories.Loader",
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -260,7 +259,6 @@ INSTALLED_APPS = (
     "mezzanine.galleries",
     "mezzanine.twitter",
     'auth',
-    'errors',
     #"mezzanine.accounts",
     #"mezzanine.mobile",
 )
