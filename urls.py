@@ -28,6 +28,8 @@ urlpatterns = patterns("",
 
     ("^pagedown/", include(mezzanine_pagedown.urls)),
     url(r'^join_a_team$', 'teams.views.join_a_team'),
+    url(r'^join/([^\/]*)[\/]?$', 'teams.views.join'),
+    url(r'^leave/([^\/]*)[\/]?$', 'teams.views.leave'),
     #    direct_to_template,
     #        {'template': 'teams/teams.html'},
     #        name='teams'
