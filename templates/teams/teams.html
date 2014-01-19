@@ -8,26 +8,32 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
 
+    <script>
+        $(document).ready( function () {
+            $('button.team-btn').click( function () {
+                alert($(this).attr('verb') + ' ' + $(this).attr('id') );
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block main %}
     <div id='content'>
         <h1>Teams</h1>
-        {% for (team, description, subscribed) in teams %}
-            {% if subscribed %}
-                {% set verb = 'Leave' %}
-                {% set class = 'btn-warning' %}
-            {% else %}
-                {% set verb = 'Join' %}
-                {% set class = 'btn-success' %}
-            {% endif %}
-
+        {% for team in teams %}
             {% comment %}
-            I am so sorry for this. (Rafi Blecher)
+                team.0 is team name
+                team.1 is team description
+                team.2 is whether the user is subscribed to the team
+                Django templating engine is shit. It's not my fault!
             {% endcomment %}
-
             <div class='team'>
-                <button type='button' class='btn {{ class }}'>{{ verb }}{{ team }}</button> - {{ description }}
+                <div class='team-button'>
+                    <button type='button' id='{{ team.0 }}' verb='{% if team.2 %}leave{% else %}join{% endif %}' class='team-btn btn {% if team.2 %}btn-warning{% else %}btn-success{% endif %}'>{% if team.2 %}Leave{% else %}Join{% endif %} {{ team.0 }}</button>
+                </div>
+                <div class='team-description'>
+                    {{ team.1 | safe }}
+                </div>
             </div>
         {% endfor %}
     </div> <!-- #content -->
