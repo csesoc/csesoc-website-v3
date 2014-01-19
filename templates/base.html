@@ -72,189 +72,64 @@
             </div>
         </a>
 
-        <div id='navbar'>
-            <div id='scroller-anchor'></div>
-            <div class='scroller photo'>
-                <div id='navigation'>
-                    <div class='nav-large hide-for-small-only'>
-                        <div id='nav-wrapper'>
-                            <ul class='nav-grid dropdown'>
-                                <li>
-                                    <a href='#teams' class='menu-link'>
-                                        <div class='menu-item-container'>
-                                            <span class='menu-item'>Teams</span>
-                                        </div>
-                                    </a>
-                                    <ul class='nav-dropdown'>
-                                      <li><a href='#'>Beta</a></li>
-                                      <li><a href='#'>Dev</a></li>
-                                      <li><a href='#'>Comp Club</a></li>
-                                      <li><a href='#'>Publicity</a></li>
-                                      <li><a href='#'>Social</a></li>
-                                      <li><a href='#'>Tech</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href='#fun-stuff' class='menu-link'>
-                                        <div class='menu-item-container'>
-                                            <span class='menu-item'>Fun Stuff</span>
-                                        </div>
-                                    </a>
-                                    <ul class='nav-dropdown'>
-                                      <li><a href='#'>Bling</a></li>
-                                      <li><a href='#'>Games</a></li>
-                                      <li><a href='#'>Lab0</a></li>
-                                      <li><a href='#'>Calendar</a></li>
-                                      <li><a href='#'>Timetable Importer</a></li>
-                                      <li><a href='#'>Soctail</a></li>
-                                      <li><a href='#'>Music</a></li>
-                                      <li><a href='#'>Murder</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href='#sponsors' class='menu-link'>
-                                        <div class='menu-item-container'>
-                                            <span class='menu-item'>Sponsors</span>
-                                        </div>
-                                    </a>
-                                    <ul class='nav-dropdown'>
-                                      <li><a href='#'>Macquarie Group</a></li>
-                                      <li><a href='#'>Deloitte</a></li>
-                                      <li><a href='#'>Become A Sponsor</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href='#about-csesoc' class='menu-link'>
-                                        <div class='menu-item-container'>
-                                            <span class='menu-item'>About CSESoc</span>
-                                        </div>
-                                    </a>
-                                    <ul class='nav-dropdown'>
-                                      <li><a href='#'>History</a></li>
-                                      <li><a href='#'>Constitution</a></li>
-                                      <li><a href='#'>Exec and Heads</a></li>
-                                      <li><a href='#'>FAQ</a></li>
-                                      <li><a href='#'>Contact Us</a></li>
-                                    </ul>
-
-                                </li>
-                            </ul>
-                        </div>
-                        <div id='social-links' class='clearfix'>
-                            <a href='https://www.facebook.com/csesoc'>
-                                <div class='facebook social-link'>
-                                    <div class='social-wrapper'>
-                                        <img src='/static/csesoc/img/fbook.png' class='social-badge-fb'></img>
-                                        <div class='clearfix'>Facebook</div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href='https://plus.google.com/101220554982256575482'>
-                                <div class='google social-link'>
-                                    <div class='social-wrapper'>
-                                        <img src='/static/csesoc/img/gplus.png' class='social-badge gp'></img>
-                                        <div class='clearfix'>Google</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+        <div id="navbar"> 
+        <div id="scroller-anchor"></div> 
+        <div class="scroller photo"> 
+            <div id="navigation">
+                <div class="nav-large hide-for-small-only">
+                    <div id="nav-wrapper">
+                        {% page_menu "pages/menus/dropdown.html" %}
                     </div>
-                    <div class='nav-small hide-for-medium-up'>
-                        <div id='hamburger' class='dropdown clearfix'>
-                            <div class='slice'></div>
-                            <div class='slice'></div>
-                            <div class='slice'></div>
-                            <ul class='nav-dropdown ham-menu'>
-                                <li class='ham-small-only'>
-                                    <a href='#comp-club' class='menu-link'>
-                                        <span class='menu-item'>Comp Club</span>
-                                    </a>
-                                </li>
-                                <li class='ham-small-only'>
-                                    <a href='#beta' class='menu-link'>
-                                        <span class='menu-item'>&beta;eta</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href='#teams' class='menu-link'>
-                                        <span class='menu-item'>Teams</span>
-                                    </a>
-                                    <ul class='ham-submenu'>
-                                      <li><a href='#'>Beta</a></li>
-                                      <li><a href='#'>Dev</a></li>
-                                      <li><a href='#'>Comp Club</a></li>
-                                      <li><a href='#'>Publicity</a></li>
-                                      <li><a href='#'>Social</a></li>
-                                      <li><a href='#'>Tech</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href='#fun-stuff' class='menu-link'>
-                                        <span class='menu-item'>Fun Stuff</span>
-                                    </a>
-                                    <ul class='ham-submenu'>
-                                      <li><a href='#'>Bling</a></li>
-                                      <li><a href='#'>Games</a></li>
-                                      <li><a href='#'>Lab0</a></li>
-                                      <li><a href='#'>Calendar</a></li>
-                                      <li><a href='#'>Timetable Importer</a></li>
-                                      <li><a href='#'>Soctail</a></li>
-                                      <li><a href='#'>Music</a></li>
-                                      <li><a href='#'>Murder</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href='#sponsors' class='menu-link'>
-                                        <span class='menu-item'>Sponsors</span>
-                                    </a>
-                                    <ul class='ham-submenu'>
-                                      <li><a href='#'>Macquarie Group</a></li>
-                                      <li><a href='#'>Deloitte</a></li>
-                                      <li><a href='#'>Become A Sponsor</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href='#about-csesoc' class='menu-link'>
-                                        <span class='menu-item'>About CSESoc</span>
-                                    </a>
-                                    <ul class='ham-submenu'>
-                                      <li><a href='#'>History</a></li>
-                                      <li><a href='#'>Constitution</a></li>
-                                      <li><a href='#'>Exec and Heads</a></li>
-                                      <li><a href='#'>FAQ</a></li>
-                                      <li><a href='#'>Contact Us</a></li>
-                                    </ul>
-                                </li>
-                                <div id='social-links' class='clearfix ham-social-links'>
-                                    <div style='float: left;'>
-                                        <a href='https://www.facebook.com/csesoc'>
-                                            <div class='facebook social-link ham-social-link'>
-                                                <div class='social-wrapper'>
-                                                    <img src='/static/csesoc/img/fbook.png' class='social-badge-fb'></img>
-                                                    <div class='clearfix'>Facebook</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div style='float: right;'>
-                                        <a href='https://plus.google.com/101220554982256575482'>
-                                            <div class='google social-link ham-social-link'>
-                                                <div class='social-wrapper'>
-                                                    <img src='/static/csesoc/img/gplus.png' class='social-badge gp'></img>
-                                                    <div class='clearfix'>Google</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
+                    <div id="social-links" class="clearfix">
+                        <a href="https://www.facebook.com/csesoc">
+                            <div class="facebook social-link">
+                                <div class="social-wrapper">
+                                    <img src="{% static "img/fbook.png" %}" class="social-badge-fb"></img>
+                                    <div class="clearfix">Facebook</div>
                                 </div>
-                            </ul>
-                        </div>
+                            </div>
+                        </a>
+                        <a href="https://plus.google.com/101220554982256575482">
+                            <div class="google social-link">
+                                <div class="social-wrapper">
+                                    <img src="{% static "img/gplus.png" %}" class="social-badge gp"></img>
+                                    <div class="clearfix">Google</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="nav-small hide-for-medium-up">
+                    <div id="nav-wrapper">
+                        <ul class="nav-grid dropdown nav-small-list">
+                            <li>
+                                <a href="#comp-club" class="menu-link">
+                                    <div class="menu-item-container comp-club-navbar">
+                                        <span class="menu-item">Comp Club</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#beta" class="menu-link">
+                                    <div class="menu-item-container beta-navbar">
+                                        <span class="menu-item">&beta;eta</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="hamburger" class="dropdown clearfix">
+                        <div class="slice"></div>
+                        <div class="slice"></div>
+                        <div class="slice"></div>
+                        {% page_menu "pages/menus/dropdown_ham.html" %}
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id='nav-padding'></div>
+    <div id="nav-padding"></div>
 
             <div class="container">
                 {% nevercache %}
