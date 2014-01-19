@@ -33,7 +33,7 @@
                            the possibility of having spaces in team name (used as ID), like "HS Team"
                         {% endcomment %}
                         if (data.substring(0, 7) == 'success') {
-                            $('<span class="' + action+team + '"><br />Success!</span>').insertAfter($("[id='"+team+"']"));
+                            $('<div data-alert class="alert-box success radius ' + action+team + '">Success!</div>').appendTo("#alerts");
                             // Successfully joined or left a team. Hence, toggle the button.
                             button.toggleClass('btn-warning').toggleClass('btn-success');
                             if (button.attr('verb') == 'join') {
@@ -43,7 +43,7 @@
                             }
                             button.text(button.attr('verb').capitalize() + ' ' + team);
                         } else {
-                            $('<span class="' + action+team + ' text-danger"><br />Error!</span>').insertAfter($("[id='"+team+"']"));
+                            $('<div data-alert class="alert-box warning radius ' + action+team + '">Error!</div>').appendTo("#alerts");
                         }
 
                         {% comment %}
