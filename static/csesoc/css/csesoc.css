@@ -616,6 +616,10 @@ strong, b {
     width: 70%;
 }
 
+.team-btn {
+    min-width: 140px;
+}
+
 @media (max-width: 767px) {
     .team  {
         position: inherit;
