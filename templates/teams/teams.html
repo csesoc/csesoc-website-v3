@@ -14,6 +14,10 @@
         };
         $(document).ready( function () {
             $('button.team-btn').click( function () {
+                $('.alert-box').remove();
+                if (typeof(alertTimeout) != "undefined") {
+                    clearTimeout(alertTimeout);
+                }
                 button = $(this);
                 action = button.attr('verb'); // this is "join" or "leave"
                 team = button.attr('id'); // e.g. "Dev" or "HS Team"
@@ -33,7 +37,12 @@
                            the possibility of having spaces in team name (used as ID), like "HS Team"
                         {% endcomment %}
                         if (data.substring(0, 7) == 'success') {
-                            $('<div data-alert class="alert-box success radius ' + action+team + '">Success!</div>').appendTo("#alerts");
+                            if (action == "join") {
+                                $('<div data-alert class="alert-box success radius ' + action+team + '">Success!</div>').appendTo("#alerts");
+                            } else {
+                                $('<div data-alert class="alert-box warning radius ' + action+team + '">Success!</div>').appendTo("#alerts");
+                            }
+
                             // Successfully joined or left a team. Hence, toggle the button.
                             button.toggleClass('btn-warning').toggleClass('btn-success');
                             if (button.attr('verb') == 'join') {
@@ -43,14 +52,17 @@
                             }
                             button.text(button.attr('verb').capitalize() + ' ' + team);
                         } else {
-                            $('<div data-alert class="alert-box warning radius ' + action+team + '">Error!</div>').appendTo("#alerts");
+                            $('<div data-alert class="alert-box radius ' + action+team + '">Error!</div>').appendTo("#alerts");
                         }
 
                         {% comment %}
                           Sneakily enough, this *doesn't* fade out errors, because the class doesn't match. I'd call this a good thing,
                           but if you don't like it, we'll have to find some other way to handle this situation.
                         {% endcomment %}
-                        $("[class='" + action+team + "']").fadeOut(3000);
+                        $("[class*='" + action+team + "']").fadeOut(3000);
+                        alertTimeout = setTimeout( function () {
+                            $("[class*='" + action+team + "']").remove();
+                        }, 3000);
                     }
                 });
             });
@@ -74,9 +86,13 @@
                         <a href='/teams/{{ team.0 }}'>{{ team.0 }} Team</a><br />
                         {{ team.1 }}
                     </div>
+                    {% comment %}
+                      Pretty dirty way of continuing over a line in mobiles. If you can think of a nicer
+                      way to do this, go ahead!
+                    {% endcomment %}
                     <div class='visible-xs'><br /></div>
                     <div class='team-button'>
-                        <button type='button' id='{{ team.0 }}' verb='{% if team.2 %}leave{% else %}join{% endif %}' class='team-btn btn {% if team.2 %}btn-warning{% else %}btn-success{% endif %}'>{% if team.2 %}Leave{% else %}Join{% endif %} {{ team.0 }}</button>
+                        <button type='button' id='{{ team.0 }}' verb='{% if team.2 %}leave{% else %}join{% endif %}' class='pull-right team-btn btn {% if team.2 %}btn-warning{% else %}btn-success{% endif %}'>{% if team.2 %}Leave{% else %}Join{% endif %} {{ team.0 }}</button>
                     </div>
                 </div>
             {% endfor %}
