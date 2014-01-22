@@ -55,10 +55,6 @@
                             $('<div data-alert class="alert-box radius ' + action+team + '">Error!</div>').appendTo("#alerts");
                         }
 
-                        {% comment %}
-                          Sneakily enough, this *doesn't* fade out errors, because the class doesn't match. I'd call this a good thing,
-                          but if you don't like it, we'll have to find some other way to handle this situation.
-                        {% endcomment %}
                         $("[class*='" + action+team + "']").fadeOut(3000);
                         alertTimeout = setTimeout( function () {
                             $("[class*='" + action+team + "']").remove();
