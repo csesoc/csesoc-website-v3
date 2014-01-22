@@ -38,9 +38,9 @@
                         {% endcomment %}
                         if (data.substring(0, 7) == 'success') {
                             if (action == "join") {
-                                $('<div data-alert class="alert-box success radius ' + action+team + '">Success!</div>').appendTo("#alerts");
+                                $('<div data-alert class="alert-box team-msg success radius ' + action+team + '">Success!</div>').insertAfter($("[id='"+team+"']"));
                             } else {
-                                $('<div data-alert class="alert-box warning radius ' + action+team + '">Success!</div>').appendTo("#alerts");
+                                $('<div data-alert class="alert-box team-msg warning radius ' + action+team + '">Success!</div>').insertAfter($("[id='"+team+"']"));
                             }
 
                             // Successfully joined or left a team. Hence, toggle the button.
@@ -52,7 +52,7 @@
                             }
                             button.text(button.attr('verb').capitalize() + ' ' + team);
                         } else {
-                            $('<div data-alert class="alert-box radius ' + action+team + '">Error!</div>').appendTo("#alerts");
+                            $('<div data-alert class="alert-box team-msg radius ' + action+team + '">Error!</div>').insertAfter($("[id='"+team+"']"));
                         }
 
                         $("[class*='" + action+team + "']").fadeOut(3000);

@@ -617,12 +617,22 @@ strong, b {
 }
 
 .team-btn {
-    min-width: 140px;
+    width: 140px;
+}
+
+.team-msg {
+    text-align: center;
+    height: 34px;
+    float: right;
+    width: 140px;
+    padding: 4px 12px;
+    margin-top: 5px;
 }
 
 @media (max-width: 767px) {
     .team  {
         position: inherit;
+        margin-bottom: 10px;
     }
 
     .team > .team-description {
@@ -635,8 +645,13 @@ strong, b {
         position: inherit;
     }
 
-    .team {
-        margin-bottom: 10px;
+    .team-btn,
+    .team-msg {
+        float: none !important;
+    }
+
+    .news-card {
+        padding: 1.5rem 1rem;
     }
 }
 
