@@ -657,3 +657,8 @@ margin: 0 auto -4em;
 .footer, .push {
 height: 4em;
 }
+
+.nolink a:hover, a:visited, a:link, a:active {
+    color:#000;
+    text-decoration: none;
+}
