@@ -43,7 +43,7 @@
             <script src='{% static 'csesoc/js/vendor/custom.modernizr.js' %}'></script>
             {% block extra_js %}{% endblock %}
         {% endcompress %}
-
+        {% include "includes/header_scripts.html" %}
         <!--[if lt IE 9]>
         <script src="{% static "js/html5shiv.js" %}"></script>
         <script src="{% static "js/respond.min.js" %}"></script>

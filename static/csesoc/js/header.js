@@ -22,7 +22,7 @@ function setPhoto() {
                 ];
     var photo = photos[Math.floor(Math.random()*photos.length)];
 
-    $(".photo").css("background-image", "url(static/csesoc/img/"+photo[name]+")");
+    $(".photo").css("background-image", "url(/static/csesoc/img/"+photo[name]+")");
     console.log(photo);
     $(".footer-photo").css("background-image", "url(static/csesoc/img/"+photo[name]+")");
 
