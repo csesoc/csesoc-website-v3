@@ -17,6 +17,11 @@ urlpatterns = patterns("",
     url(r'^signin$', direct_to_template, {'template': 'signin/signin.html'}, name='signin'),
     url(r'^login$', 'auth.views.signin'),
     ("^pagedown/", include(mezzanine_pagedown.urls)),
+
+
+    url(r'^sponsors$', 'app.sponsors.views.sponsors'),
+
+
     (r'^static/(?P<path>.*)$',
      'django.views.static.serve',
      {'document_root':
