@@ -465,7 +465,7 @@ strong, b {
 
 
 #categories {
-    float: right;
+   /* float: left;*/
 }
 
 @media (max-width: 1156px) {
@@ -494,13 +494,12 @@ strong, b {
     font-size: 1rem;
     font-family: "Roboto Condensed";
     font-weight: 400;
-    text-align: right;
-    padding-right: 0.5rem;
+    padding-left: 0.5rem;
     margin: 0;
 }
 
 #categories div {
-    float: right;
+    float: left;
     width: 4rem;
 }
 
@@ -513,8 +512,8 @@ strong, b {
     color: white;
     width: 4rem;
     text-align: right;
-    border-bottom-left-radius: 0.2rem;
-    border-top-left-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+    border-top-right-radius: 0.2rem;
 }
 
 #news {
@@ -677,3 +676,20 @@ height: 4em;
     color:#000;
     text-decoration: none;
 }
+
+.sticky {  
+    position: absolute;  
+    width: 100%;  
+    left: 0;  
+    z-index: 100;  
+    border-top: 0;  
+} 
+
+.sticky2 {  
+    position: fixed;  
+    width: 100%;  
+    left: 0;  
+    top: 350px;  
+    z-index: 100;  
+    border-top: 0;  
+} 
