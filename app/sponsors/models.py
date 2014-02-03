@@ -7,8 +7,8 @@ class Sponsor(models.Model):
     website 	= models.URLField()
     logo 		= models.ImageField(upload_to='sponsors')
     amount_paid = models.PositiveIntegerField()
-    start_date 	= models.DateField(auto_now_add=True, editable=True)
+    start_date 	= models.DateField(auto_now_add=True, editable=False)
     expiry_date = models.DateField()
-    alt_text 	= models.TextField(blank=True)
+    alt_text 	= models.CharField(max_length=200)
     def __unicode__(self):
         return self.name
