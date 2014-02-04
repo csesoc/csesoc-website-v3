@@ -35,10 +35,6 @@ urlpatterns = patterns("",
     #        name='teams'
     #        ),
 
-    (r'^static/(?P<path>.*)$',
-     'django.views.static.serve',
-     {'document_root': local_settings.STATIC_ROOT.rstrip('/')}
-     ),
 
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
