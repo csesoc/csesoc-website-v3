@@ -4,7 +4,7 @@ from django.contrib import admin
 from mezzanine.core.views import direct_to_template
 
 import local_settings
-
+import mezzanine_pagedown.urls
 
 admin.autodiscover()
 
@@ -16,7 +16,7 @@ urlpatterns = patterns("",
 
     url(r'^signin$', direct_to_template, {'template': 'signin/signin.html'}, name='signin'),
     url(r'^login$', 'auth.views.signin'),
-
+    ("^pagedown/", include(mezzanine_pagedown.urls)),
     (r'^static/(?P<path>.*)$',
      'django.views.static.serve',
      {'document_root':

@@ -257,9 +257,15 @@ INSTALLED_APPS = (
     "mezzanine.galleries",
     "mezzanine.twitter",
     'auth',
+    "mezzanine_pagedown",
     #"mezzanine.accounts",
     #"mezzanine.mobile",
 )
+
+RICHTEXT_WIDGET_CLASS = 'mezzanine_pagedown.widgets.PageDownWidget'
+RICHTEXT_FILTER = 'mezzanine_pagedown.filters.custom'
+RICHTEXT_FILTER_LEVEL = 3
+PAGEDOWN_MARKDOWN_EXTENSIONS = ('extra','codehilite','toc')
 
 # List of processors used by RequestContext to populate the context.
 # Each one should be a callable that takes the request object as its
