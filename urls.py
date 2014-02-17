@@ -1,12 +1,10 @@
-from __future__ import unicode_literals
-
 from django.conf.urls import patterns, include, url
-from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 
 from mezzanine.core.views import direct_to_template
-from mezzanine.conf import settings
 
+import local_settings
+import mezzanine_pagedown.urls
 
 admin.autodiscover()
 
@@ -14,21 +12,26 @@ admin.autodiscover()
 # You can also change the ``home`` view to add your own functionality
 # to the project's homepage.
 
-urlpatterns = i18n_patterns("",
+urlpatterns = patterns("",
+
+    url(r'^signin$', direct_to_template, {'template': 'signin/signin.html'}, name='signin'),
+    url(r'^login$', 'auth.views.signin'),
+    ("^pagedown/", include(mezzanine_pagedown.urls)),
+
+
+    url(r'^sponsors$', 'app.sponsors.views.sponsors'),
+
+
+    (r'^static/(?P<path>.*)$',
+     'django.views.static.serve',
+     {'document_root':
+         local_settings.STATIC_ROOT.rstrip('/')
+     }
+    ),
 
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
     ("^admin/", include(admin.site.urls)),
-)
-
-# Filebrowser admin media library.
-if getattr(settings, "PACKAGE_NAME_FILEBROWSER") in settings.INSTALLED_APPS:
-    urlpatterns += i18n_patterns("",
-        ("^admin/media-library/", include("%s.urls" %
-                                        settings.PACKAGE_NAME_FILEBROWSER)),
-    )
-
-urlpatterns += patterns('',
 
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.
@@ -40,7 +43,7 @@ urlpatterns += patterns('',
     # one homepage pattern, so if you use a different one, comment this
     # one out.
 
-    url("^$", direct_to_template, {"template": "index.html"}, name="home"),
+    #url("^$", direct_to_template, {"template": "index.html"}, name="home"),
 
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------
@@ -65,7 +68,7 @@ urlpatterns += patterns('',
     # ``settings.py`` module, and delete the blog page object from the
     # page tree in the admin if it was installed.
 
-    # url("^$", "mezzanine.blog.views.blog_post_list", name="home"),
+    url("^$", "mezzanine.blog.views.blog_post_list", name="home"),
 
     # MEZZANINE'S URLS
     # ----------------
