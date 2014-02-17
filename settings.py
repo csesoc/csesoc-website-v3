@@ -103,7 +103,7 @@ ALLOWED_HOSTS = []
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = None
+TIME_ZONE = 'Australia/Sydney'
 
 # If you set this to True, Django will use timezone-aware datetimes.
 USE_TZ = True
@@ -256,10 +256,17 @@ INSTALLED_APPS = (
     "mezzanine.pages",
     "mezzanine.galleries",
     "mezzanine.twitter",
+    "mezzanine_pagedown",
     'auth',
+    'app.sponsors',
     #"mezzanine.accounts",
     #"mezzanine.mobile",
 )
+
+RICHTEXT_WIDGET_CLASS = 'mezzanine_pagedown.widgets.PageDownWidget'
+RICHTEXT_FILTER = 'mezzanine_pagedown.filters.custom'
+RICHTEXT_FILTER_LEVEL = 3
+PAGEDOWN_MARKDOWN_EXTENSIONS = ('extra','codehilite','toc')
 
 # List of processors used by RequestContext to populate the context.
 # Each one should be a callable that takes the request object as its
