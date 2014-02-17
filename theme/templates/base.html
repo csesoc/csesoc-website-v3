@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
-{% load pages_tags mezzanine_tags i18n future staticfiles %}
+{% load pages_tags mezzanine_tags i18n future staticfiles blog_tags %}
 
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -12,17 +12,21 @@
 
     <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
 
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+
     {% ifinstalled mezzanine.blog %}
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
     <link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
     {% endifinstalled %}
 
     {% compress css %}
-        <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+        <!-- <link rel="stylesheet" href="{% static "css/bootstrap.css" %}"> -->
         <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
-        <link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">
+        <!-- <link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}"> -->
+        <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+        <link rel="stylesheet" href="{% static "css/foundation.css" %}">
         <link rel='stylesheet' href="{% static "css/csesoc.css" %}">
-        <link rel='stylesheet' href="{% static "css/foundation.css" %}">
 
         {% if LANGUAGE_BIDI %}
             <link rel="stylesheet" href="{% static "css/rtl.css" %}">
@@ -38,9 +42,10 @@
 
     {% compress js %}
         <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
-        <script src="{% static "js/bootstrap.js" %}"></script>
-        <script src="{% static "js/bootstrap-extras.js" %}"></script>
+        <!-- <script src="{% static "js/bootstrap.js" %}"></script> -->
+        <!-- <script src="{% static "js/bootstrap-extras.js" %}"></script> -->
         <script src='{% static 'js/vendor/custom.modernizr.js' %}'></script>
+        <script src="{% static "js/modernizr.js" %}"></script>
         {% block extra_js %}{% endblock %}
     {% endcompress %}
     {% include "includes/header_scripts.html" %}
@@ -66,7 +71,7 @@
         </div>
     </div>
 
-    <a href='#csesoc'>
+    <a href='/'>
         <div id='title'>
             <h1 id='page-heading'>CSESoc</h1>
         </div>
@@ -110,8 +115,13 @@
         </div>
     </div>
 </div>
-
 <div id="nav-padding"></div>
+
+{% block categories %}
+{% endblock %}
+
+<div id="content">
+    {% if page.html_id != "blog" %}
     <div class="row">
         <div class="container medium-12">
             {% nevercache %}
@@ -139,17 +149,7 @@
             -->
         </div>
     </div>
-    <div id='categories' class="sticky">
-        <h3>Categories</h3>
-        <div>
-            <div class='category' id='news'>News</div>
-            <div class='category' id='social'>Social</div>
-            <div class='category' id='careers'>Careers</div>
-            <div class='category' id='tech'>Tech</div>
-            <div class='category' id='beta'>Beta</div>
-        </div>
-    </div>
-    <div style="clear:both"></div>
+    {% endif %}
     <div class="row">
         <div class="medium-9 columns">
         {% block main %}{% endblock %}

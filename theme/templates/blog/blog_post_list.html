@@ -17,28 +17,30 @@
 
 {% block title %}
 {% if page %}
-{% editable page.title %}{{ page.title }}{% endeditable %}
+<!-- {% editable page.title %}{{ page.title }}{% endeditable %} -->
 {% else %}
 {% trans "Blog" %}
 {% endif %}
 {% endblock %}
 
-{% block breadcrumb_menu %}
-{{ block.super }}
-{% if tag or category or year or month or author %}
-<li>{% spaceless %}
-{% if tag %}
-    {% trans "Tag:" %} {{ tag }}
-{% else %}{% if category %}
-    {% trans "Category:" %} {{ category }}
-{% else %}{% if year or month %}
-    {% if month %}{{ month }}, {% endif %}{{ year }}
-{% else %}{% if author %}
-    {% trans "Author:" %} {{ author.get_full_name|default:author.username }}
-{% endif %}{% endif %}{% endif %}{% endif %}
-{% endspaceless %}
-</li>
-{% endif %}
+{% block categories %}
+<div id="categories">
+    <h3>Categories</h3>
+    <div>
+        <!-- {% with something as categories %}
+        {% if categories %}
+        {% for category in categories %}
+        <div class="category" id="{{ category }}">{{ category }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %} -->
+        <div class="category" id="News">News</div>
+        <div class="category" id="Social">Social</div>
+        <div class="category" id="Careers">Careers</div>
+        <div class="category" id="Tech">Tech</div>
+        <div class="category" id="Beta">Beta</div>
+    </div>
+</div>
 {% endblock %}
 
 {% block main %}
@@ -60,16 +62,28 @@
     {% endblock %}
     </p>
 {% else %}
-    {% if page %}
+<!--     {% if page %}
     {% block blog_post_list_pagecontent %}
     {% editable page.richtextpage.content %}
     {{ page.richtextpage.content|richtext_filters|safe }}
     {% endeditable %}
     {% endblock %}
-    {% endif %}
+    {% endif %} -->
 {% endif %}
 
 {% for blog_post in blog_posts.object_list %}
+{% editable blog_post.publish_date %}
+<h6 class="post-meta">
+    {% blocktrans with sometime=blog_post.publish_date|date:"j F Y" %}{{ sometime }}{% endblocktrans %}
+</h6>
+{% endeditable %}
+<div class="news-card {% with blog_post.categories.all as categories %}
+    {% if categories %}
+    {% for category in categories %}
+    {{ category }}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}">
 {% block blog_post_list_post_title %}
 {% editable blog_post.title %}
 <h2>
@@ -78,23 +92,7 @@
 {% endeditable %}
 {% endblock %}
 {% block blog_post_list_post_metainfo %}
-{% editable blog_post.publish_date %}
-<h6 class="post-meta">
-    {% trans "Posted by" %}:
-    {% with blog_post.user as author %}
-    <a href="{% url "blog_post_list_author" author %}">{{ author.get_full_name|default:author.username }}</a>
-    {% endwith %}
-    {% with blog_post.categories.all as categories %}
-    {% if categories %}
-    {% trans "in" %}
-    {% for category in categories %}
-    <a href="{% url "blog_post_list_category" category.slug %}">{{ category }}</a>{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-    {% blocktrans with sometime=blog_post.publish_date|timesince %}{{ sometime }} ago{% endblocktrans %}
-</h6>
-{% endeditable %}
+
 {% endblock %}
 
 {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
@@ -112,7 +110,7 @@
 {% endblock %}
 
 {% block blog_post_list_post_links %}
-<div class="blog-list-detail">
+<div>
     {% keywords_for blog_post as tags %}
     {% if tags %}
     <ul class="list-inline tags">
@@ -125,8 +123,7 @@
     </ul>
     {% endif %}
     <p>
-    <a href="{{ blog_post.get_absolute_url }}">{% trans "read more" %}</a>
-    {% if blog_post.allow_comments %}
+    <!-- <a href="{{ blog_post.get_absolute_url }}">{% trans "read more" %}</a>
     /
     {% if settings.COMMENTS_DISQUS_SHORTNAME %}
     <a href="{{ blog_post.get_absolute_url }}#disqus_thread"
@@ -137,11 +134,11 @@
     <a href="{{ blog_post.get_absolute_url }}#comments">
         {% blocktrans count comments_count=blog_post.comments_count %}{{ comments_count }} comment{% plural %}{{ comments_count }} comments{% endblocktrans %}
     </a>
-    {% endif %}
-    {% endif %}
+    {% endif %} -->
     </p>
 </div>
 {% endblock %}
+</div>
 {% endfor %}
 
 {% pagination_for blog_posts %}

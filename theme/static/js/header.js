@@ -2,31 +2,64 @@
 var navPos = $("#scroller-anchor").offset().top;
 var navBarHeight = $(".scroller").height();
 var photoHeightModifier;
+var photos =  [
+    {name: "balloons.jpg", height: 1/5},
+    {name: "camp.jpg", height: 25/40},
+    {name: "firstyear2013-01.jpg", height: 27/36},
+    {name: "firstyear2013-02.jpg", height: 1/3},
+    // {name: "logo.jpg", height: 1/2},
+    {name: "csesoc.jpg", height: 5/7},
+    {name: "luke.jpg", height: 2/3},
+    {name: "party.jpg", height: 2/5},
+    {name: "rainy-bbq.jpg", height: 1/3},
+    {name: "sand.jpg", height: 2/3},
+    {name: "seminar.jpg", height: 3/4},
+    {name: "spongebob.jpg", height: 1/2},
+    {name: "trivia.jpg", height: 3/5}
+];
 
-function setPhoto() {
+function photoPositionTransition() {
+    var scrollTop = $(document).scrollTop();
+    var photoPos;
+
+    var width = $(window).width();
+    // var photoHeight = 2 * width / 3;
+    var photoHeight = width * photoHeightModifier;
+
+    if (scrollTop <= 0 && $(".feature").css("display") != "none") {
+        // full header
+        photoPos = (photoHeight / 2) - navPos/2;
+    } else if (scrollTop >= navPos || $(".feature").css("display") == "none") {
+        // sticky navbar
+        photoPos = (photoHeight / 2) - navBarHeight/2;
+    } else {
+        // in between
+        photoPos = (photoHeight / 2) - (-96/navPos * scrollTop + navPos/2);
+    }
+
+    $(".photo").css("background-position", "0 -"+photoPos.toString()+"px");
+}
+
+function setPhoto(photoNum) {
     var name = "name";
     var height = "height";
-    var photos =  [ {name: "balloons.jpg", height: 1/5},
-                    {name: "camp.jpg", height: 25/40},
-                    {name: "deloitte-swag.jpg", height:5/32},
-                    {name: "firstyear2013-01.jpg", height: 27/36},
-                    {name: "firstyear2013-02.jpg", height: 1/3},
-                    {name: "logo.jpg", height: 1/2},
-                    {name: "luke.jpg", height: 2/3},
-                    {name: "party.jpg", height: 2/5},
-                    {name: "rainy-bbq.jpg", height: 1/3},
-                    {name: "sand.jpg", height: 2/3},
-                    {name: "seminar.jpg", height: 3/4},
-                    {name: "spongebob.jpg", height: 1/2},
-                    {name: "trivia.jpg", height: 3/5}
-                ];
-    var photo = photos[Math.floor(Math.random()*photos.length)];
+    
+    var photo;
+    if (photoNum == -1) {
+        var photo = photos[Math.floor(Math.random()*photos.length)];
+    } else {
+        var photo = photos[photoNum];
+    }
 
-    $(".photo").css("background-image", "url(/static/img/"+photo[name]+")");
     console.log(photo);
-    $(".footer-photo").css("background-image", "url(static/img/"+photo[name]+")");
 
     photoHeightModifier = photo[height];
+    // photoHeightModifier = 5/7;
+    
+    $(".photo").css("background-image", "url(/static/img/"+photo[name]+")");
+    $(".footer-photo").css("background-image", "url(/static/img/"+photo[name]+")");
+
+    photoPositionTransition();
 
 }
 
@@ -98,11 +131,23 @@ function subtitleFade(scrollTop) {
         // in between
         fadeLevel = -scrollTop/height + 1;
     }
-    console.log(scrollTop, height, fadeLevel);
+    // console.log(scrollTop, height, fadeLevel);
     $("#subtitle").css("color", "rgba(0,0,0,"+fadeLevel.toString()+")");
 }
 
-setPhotoOffset = function() {
+// every time scrolling happens, call the two functions
+// but only check the scrolling position once
+function headerAnimate() {
+    var scrollTop = $(document).scrollTop();
+
+    if ($(window).height() < $(document).height()) {
+        titleZoom(scrollTop);
+        stickyNav(scrollTop);
+        subtitleFade(scrollTop);
+    }
+}
+
+function setPhotoOffset() {
     var width = $(window).width();
     // var photoHeight = 2 * width / 3;
     var photoHeight = width * photoHeightModifier;
@@ -118,25 +163,13 @@ setPhotoOffset = function() {
     }
     
 
-    console.log(offset);
+    // console.log(offset);
 
-    $(".photo").css("background-position", "0 -"+offset.toString()+"px");
+    $(".photo").css({"background-position": "0 -"+offset.toString()+"px"});
 }
 
-// every time scrolling happens, call the two functions
-// but only check the scrolling position once
-headerAnimate = function() {
-    var scrollTop = $(document).scrollTop();
-
-    if ($(window).height() < $(document).height()) {
-        titleZoom(scrollTop);
-        stickyNav(scrollTop);
-        subtitleFade(scrollTop);
-    }
-};
-
-headerSetup = function() {
-    setPhoto();
+function headerSetup() {
+    setPhoto(4);
 
     var scrollTop = $(document).scrollTop();
 
@@ -164,3 +197,7 @@ $(window).resize(function() {
     $(".ham-menu").css("max-height", height.toString()+"px");
 
 });
+
+setInterval(function(){
+    setPhoto(-1);
+}, 30000);
