@@ -260,9 +260,8 @@ INSTALLED_APPS = (
     "mezzanine.galleries",
     "mezzanine.twitter",
     "mezzanine_pagedown",
-    'auth',
     'app.sponsors',
-    'errors',
+    'auth',
     #"mezzanine.accounts",
     #"mezzanine.mobile",
 )
