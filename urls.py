@@ -27,6 +27,7 @@ urlpatterns = patterns("",
     url(r'^zlogout$', 'auth.views.signout'),
 
     ("^pagedown/", include(mezzanine_pagedown.urls)),
+
     url(r'^join_a_team$', 'teams.views.join_a_team'),
     url(r'^join/([^\/]*)[\/]?$', 'teams.views.join'),
     url(r'^leave/([^\/]*)[\/]?$', 'teams.views.leave'),

@@ -22,39 +22,41 @@
                 action = button.attr('verb'); // this is "join" or "leave"
                 team = button.attr('id'); // e.g. "Dev" or "HS Team"
 
-                $.ajax({
-                    url: '/' + action + '/' + team,
-                    type: 'get',
-                    dataType: 'html',
-                    async: false,
-                    success: function(data) {
-                        if ($('.'+action+team).length) {
-                            $('.'+action+team).remove();
-                        }
+                if ($('.'+action+team).length) {
+                    $('.'+action+team).remove();
+                }
 
+                $.ajax({
+                    url: 'http://cgi.cse.unsw.edu.au/~csesoc/updateMailingLists',
+                    data: { action: action, team: team, cseid: {{user.profile.cselogin}} },
+                    dataType: 'jsonp',
+
+                    success: function(response){
+                        console.log(response);
                         {% comment %}
                            (Rafi Blecher) sorry for the icky selectors. It's the easiest way to deal with
                            the possibility of having spaces in team name (used as ID), like "HS Team"
                         {% endcomment %}
-                        if (data.substring(0, 7) == 'success') {
-                            if (action == "join") {
-                                $('<div data-alert class="alert-box team-msg success radius ' + action+team + '">Success!</div>').insertAfter($("[id='"+team+"']"));
-                            } else {
-                                $('<div data-alert class="alert-box team-msg warning radius ' + action+team + '">Success!</div>').insertAfter($("[id='"+team+"']"));
-                            }
-
-                            // Successfully joined or left a team. Hence, toggle the button.
-                            button.toggleClass('btn-warning').toggleClass('btn-success');
-                            if (button.attr('verb') == 'join') {
-                                button.attr('verb', 'leave');
-                            } else {
-                                button.attr('verb', 'join');
-                            }
-                            button.text(button.attr('verb').capitalize() + ' ' + team);
+                        if (action == "join") {
+                            $('<div data-alert class="alert-box team-msg success radius ' + action+team + '">Success!</div>').insertAfter($("[id='"+team+"']"));
                         } else {
-                            $('<div data-alert class="alert-box team-msg radius ' + action+team + '">Error!</div>').insertAfter($("[id='"+team+"']"));
+                            $('<div data-alert class="alert-box team-msg warning radius ' + action+team + '">Success!</div>').insertAfter($("[id='"+team+"']"));
                         }
 
+                        // Successfully joined or left a team. Hence, toggle the button.
+                        button.toggleClass('btn-warning').toggleClass('btn-success');
+                        if (button.attr('verb') == 'join') {
+                            button.attr('verb', 'leave');
+                        } else {
+                            button.attr('verb', 'join');
+                        }
+                        button.text(button.attr('verb').capitalize() + ' ' + team);
+                    },
+                    error: function(response){
+                        console.log(response);
+                        $('<div data-alert class="alert-box team-msg radius ' + action+team + '">Error!</div>').insertAfter($("[id='"+team+"']"));
+                    },
+                    complete: function() {
                         $("[class*='" + action+team + "']").fadeOut(3000);
                         alertTimeout = setTimeout( function () {
                             $("[class*='" + action+team + "']").remove();
@@ -70,17 +72,19 @@
     <div id='content'>
         <div class='news-card'>
             <h1>Teams</h1>
+            <h2>You are {{user.profile.cselogin}}</h2>
             {% for team in teams %}
                 {% comment %}
                     team.0 is team name
-                    team.1 is team description
-                    team.2 is whether the user is subscribed to the team
+                    team.1 is truename
+                    team.2 is team description
+                    team.3 is whether or not they're subscribed
                     Django templating engine is shit. It's not my fault!
                 {% endcomment %}
                 <div class='team'>
                     <div class='team-description'>
-                        <a href='/teams/{{ team.0 }}'>{{ team.0 }} Team</a><br />
-                        {{ team.1 }}
+                        <a href='/teams/{{ team.1 }}'>{{ team.0 }} Team</a><br />
+                        {{ team.2 }}
                     </div>
                     {% comment %}
                       Pretty dirty way of continuing over a line in mobiles. If you can think of a nicer
@@ -88,7 +92,7 @@
                     {% endcomment %}
                     <div class='visible-xs'><br /></div>
                     <div class='team-button'>
-                        <button type='button' id='{{ team.0 }}' verb='{% if team.2 %}leave{% else %}join{% endif %}' class='pull-right team-btn btn {% if team.2 %}btn-warning{% else %}btn-success{% endif %}'>{% if team.2 %}Leave{% else %}Join{% endif %} {{ team.0 }}</button>
+                        <button type='button' id='{{ team.1 }}' verb='{% if team.3 %}leave{% else %}join{% endif %}' class='pull-right team-btn btn {% if team.3 %}btn-warning{% else %}btn-success{% endif %}'>{% if team.3 %}Leave{% else %}Join{% endif %} {{ team.0 }}</button>
                     </div>
                 </div>
             {% endfor %}
