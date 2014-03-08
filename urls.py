@@ -18,7 +18,7 @@ urlpatterns = patterns("",
     url(r'^login$', 'auth.views.signin'),
     ("^pagedown/", include(mezzanine_pagedown.urls)),
 
-
+    url(r'^timetable-importer$', 'app.timetable.views.show'),
     url(r'^sponsors$', 'app.sponsors.views.sponsors'),
 
 
