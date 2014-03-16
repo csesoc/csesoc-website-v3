@@ -14,20 +14,27 @@ admin.autodiscover()
 
 urlpatterns = patterns("",
 
-    url(r'^signin$', direct_to_template, {'template': 'signin/signin.html'}, name='signin'),
-    url(r'^login$', 'auth.views.signin'),
-    ("^pagedown/", include(mezzanine_pagedown.urls)),
-
-
     url(r'^sponsors$', 'app.sponsors.views.sponsors'),
 
+    # Login for zIDs, NOT admin. This is only a temporary solution
+    # because later, CSESoc's execs will be given admin permission
+    # and will need to auth via LDAP too.
+    url(r'^signin$', direct_to_template,
+        {'template': 'auth/login.html'},
+        name='signin'
+        ),
+    url(r'^zlogin$', 'auth.views.signin'),
+    url(r'^zlogout$', 'auth.views.signout'),
 
-    (r'^static/(?P<path>.*)$',
-     'django.views.static.serve',
-     {'document_root':
-         local_settings.STATIC_ROOT.rstrip('/')
-     }
-    ),
+    ("^pagedown/", include(mezzanine_pagedown.urls)),
+    url(r'^join_a_team$', 'teams.views.join_a_team'),
+    url(r'^join/([^\/]*)[\/]?$', 'teams.views.join'),
+    url(r'^leave/([^\/]*)[\/]?$', 'teams.views.leave'),
+    #    direct_to_template,
+    #        {'template': 'teams/teams.html'},
+    #        name='teams'
+    #        ),
+
 
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.

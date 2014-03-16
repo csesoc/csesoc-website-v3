@@ -128,6 +128,8 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 SITE_ID = 1
 
+SITE_TITLE = 'CSESoc'
+
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = False
@@ -144,7 +146,7 @@ TEMPLATE_LOADERS = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    #"mezzanine.core.auth_backends.MezzanineBackend",
+    "mezzanine.core.auth_backends.MezzanineBackend",
     'auth.ldap_auth.ldapBackend',
 )
 
@@ -239,6 +241,7 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 ################
 
 INSTALLED_APPS = (
+    "theme",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -257,8 +260,8 @@ INSTALLED_APPS = (
     "mezzanine.galleries",
     "mezzanine.twitter",
     "mezzanine_pagedown",
-    'auth',
     'app.sponsors',
+    'auth',
     #"mezzanine.accounts",
     #"mezzanine.mobile",
 )
