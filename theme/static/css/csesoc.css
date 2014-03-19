@@ -18,6 +18,8 @@
     padding-bottom: 1rem;
     font-size: 13.5pt;
     font-family: "Roboto Condensed";
+    font-weight: 400;
+    color: #222222;
     z-index: 12;
 }
 
@@ -32,7 +34,7 @@
     z-index: 5;
 }
 
-h1 {
+#page-heading {
     font-size: 18pt;
     font-family: "Roboto";
     font-weight: 100;
@@ -62,11 +64,17 @@ h1 {
     height: 3.5rem;
     width: 6rem;
     margin-top: 0.5rem;
-    background: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.65);
     font-family: "Roboto Condensed";
+    font-weight: 400;
+    color: #222222;
     border-bottom-left-radius: 0.2rem;
     border-top-left-radius: 0.2rem;
     z-index: 100;
+}
+
+#buttons div:hover {
+    background: rgba(255,255,255,0.85);
 }
 
 #navigation {
@@ -162,7 +170,7 @@ ul.dropdown ul li:hover {
 ul.dropdown ul li a {
     width: 100%;
     display: inline-block;
-    color: black;
+    color: #222222;
 }
 
 #nav-wrapper {
@@ -286,7 +294,7 @@ ul.dropdown ul li a {
 #hamburger ul li a {
     width: 100%;
     display: inline-block;
-    color: black;
+    color: #222222;
 }
 
 .ham-submenu {
@@ -407,18 +415,26 @@ ul.dropdown ul li a {
     float: center;
 }
 
-h6 {
-    font-family: "Roboto Condensed";
-    font-weight: 400;
-}
-
 h2 {
     font-size: 18pt;
     font-family: "Roboto Condensed";
     font-weight: 300;
 }
+h2 a {
+    color: #222222;
+}
 
-p {
+h4 {
+    font-family: "Roboto Condensed";
+    font-weight: 300;
+}
+
+h6 {
+    font-family: "Roboto Condensed";
+    font-weight: 400;
+}
+
+p, li {
     font-family: "Roboto";
     font-weight: 300;
 }
@@ -467,16 +483,34 @@ strong, b {
 
 
 
-#categories {
+.categories {
     float: left;
+    overflow: hidden;
+}
+
+#categories-small {
+    display: none;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 
 @media (max-width: 1156px) {
-    #categories {
-        float: center;
+    #categories-large {
+        display: none;
+    }
+    #categories-small {
+        display: inherit;
     }
 
-    #categories div {
+    .categories {
+        float: right;
+    }
+
+    .categories h3 {
+        text-align: left;
+    }
+
+    .categories div {
         width: auto !important;
     }
 
@@ -488,12 +522,12 @@ strong, b {
 }
 
 @media (max-width: 375px) {
-    #categories {
+    .categories {
         margin-bottom: 1.8rem;
     }
 }
 
-#categories h3 {
+.categories h3 {
     font-size: 1rem;
     font-family: "Roboto Condensed";
     font-weight: 400;
@@ -501,7 +535,7 @@ strong, b {
     margin: 0;
 }
 
-#categories div {
+.categories div {
     float: left;
     width: 4rem;
 }
@@ -559,6 +593,33 @@ strong, b {
 #beta:hover {
     background-color: #9702A7;
 }
+
+h1 {
+    font-family: "Roboto Condensed";
+    font-size: 2rem;
+}
+
+table {
+    width: 100%;
+}
+
+thead, th {
+    text-align: left;
+}
+
+thead h3, th h3 {
+    font-size: 18pt;
+    margin: 0;
+    font-family: "Roboto Condensed";
+}
+
+th {
+    text-align: right;
+    font-family: "Roboto Condensed";
+}
+
+
+
 
 
 /* Footer */
@@ -673,11 +734,6 @@ margin: 0 auto -4em;
 }
 .footer, .push {
 height: 4em;
-}
-
-.nolink a:hover, a:visited, a:link, a:active {
-    color:#000;
-    text-decoration: none;
 }
 
 /*.sticky {  

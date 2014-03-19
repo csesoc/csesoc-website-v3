@@ -61,11 +61,13 @@
     <div class="wrapper">
     <!-- HEADER -->
 
-    <a href="/" class="nolink"><div class='feature photo show-for-medium-up'>
+    
+    <div class='feature photo show-for-medium-up'>
         <div id='subtitle' class="medium-10">
             UNSW Computer Science and Engineering Society
         </div>
         <div id='buttons'>
+            <a href="/"><div>Home</div></a>
             <a href="http://beta.csesoc.unsw.edu.au"><div>Beta</div></a>
             <a href="http://compclub.com.au"><div>Comp Club</div></a>
         </div>
@@ -75,7 +77,7 @@
         <div id='title'>
             <h1 id='page-heading'>CSESoc</h1>
         </div>
-    </a></a>
+    </a>
 
     <div id="navbar"> 
     <div id="scroller-anchor"></div> 
@@ -117,7 +119,7 @@
 </div>
 <div id="nav-padding"></div>
 
-{% block categories %}
+{% block categories_large %}
 {% endblock %}
 
 <div id="content">
@@ -140,6 +142,8 @@
 
             <h1>{% block title %}{% endblock %}</h1>
 
+            
+
             <!--
             <ul class="breadcrumb">
             {% spaceless %}
@@ -152,7 +156,9 @@
     {% endif %}
     <div class="row">
         <div class="medium-9 columns">
-        {% block main %}{% endblock %}
+            {% block categories_small %}
+            {% endblock %}
+            {% block main %}{% endblock %}
         </div>
         <div class="medium-3 columns">
             <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
