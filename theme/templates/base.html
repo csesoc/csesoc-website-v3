@@ -61,13 +61,15 @@
     <div class="wrapper">
     <!-- HEADER -->
 
+    <div style="position: relative;">
+        <a href="/"><div class="title-link"></div></a>
+    </div>
     
-    <div class='feature photo show-for-medium-up'>
-        <div id='subtitle' class="medium-10">
+    <div class='feature photo show-for-medium-up row'>
+        <div id='subtitle' class="medium-11">
             UNSW Computer Science and Engineering Society
         </div>
-        <div id='buttons'>
-            <a href="/"><div>Home</div></a>
+        <div id='buttons' class="medium-1">
             <a href="http://beta.csesoc.unsw.edu.au"><div>Beta</div></a>
             <a href="http://compclub.com.au"><div>Comp Club</div></a>
         </div>
@@ -140,7 +142,6 @@
                 <div id="alerts"></div>
             {% endnevercache %}
 
-            <h1>{% block title %}{% endblock %}</h1>
 
             
 
@@ -158,9 +159,16 @@
         <div class="medium-9 columns">
             {% block categories_small %}
             {% endblock %}
+            {% if page.html_id %}
+            <div class="card">
+            <h1>{% block title %}{% endblock %}</h1>
+            {% endif %}
             {% block main %}{% endblock %}
+            {% if page.html_id %}
+            </div>
+            {% endif %}
         </div>
-        <div class="medium-3 columns" style="border: solid 1px black; height: 64rem; border-radius: 0.25rem;">
+        <div class="medium-3 columns card" style="height: 64rem;">
             <h4>Sponsors</h4>
             <p>Placeholder</p>
         </div>

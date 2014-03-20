@@ -25,6 +25,7 @@
 
 .feature {
     height: 16rem;
+    max-width: 100%;
 }
 
 .scroller {
@@ -53,9 +54,19 @@
     border-top-right-radius: 0.5rem;
 }
 
+.title-link {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 16rem;
+    z-index: 50;
+
+}
+
 #buttons {
     float: right;
     margin-top: -10rem;
+    z-index: 75;
 }
 
 #buttons div {
@@ -71,6 +82,7 @@
     border-bottom-left-radius: 0.2rem;
     border-top-left-radius: 0.2rem;
     z-index: 100;
+    float: right;
 }
 
 #buttons div:hover {
@@ -448,7 +460,7 @@ strong, b {
     font-weight: 300;
 }
 
-.news-card {
+.news-card, .card {
     padding-top: 1.5rem;
     padding-left: 2rem;
     padding-right: 2rem;
@@ -457,6 +469,7 @@ strong, b {
     background-color: #FAFAFA;
     margin-bottom: 1rem;
     overflow: hidden;
+    border-radius: 0.25rem;
 }
 
 /* Category colour classes */
@@ -616,6 +629,10 @@ thead h3, th h3 {
 th {
     text-align: right;
     font-family: "Roboto Condensed";
+}
+
+td.image {
+    width: 10rem;
 }
 
 
