@@ -141,6 +141,7 @@
     transform: rotate(45deg);
     border-bottom: solid 0.15rem black;
     border-right: solid 0.15rem black;
+    display: block;
 }
 
 .caret-container {
@@ -211,7 +212,7 @@ ul.dropdown ul li a {
     float: left;
 }
 
-#social-links {
+.social-links {
     float: right;
     padding-right: 0.75rem;
     padding-top: 0.15rem;
@@ -347,6 +348,11 @@ ul.dropdown ul li a {
     display: none;
 }
 
+.ham-social-links-li {
+    padding: 0 !important;
+    font-weight: normal;
+}
+
 .ham-social-links {
     padding-right: 0.3rem !important;
     padding-top: 0.25rem !important;
@@ -447,7 +453,7 @@ ul.dropdown ul li a {
     margin-bottom: 4rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    float: center;
+    float: inherit;
 }
 
 h2 {
@@ -591,44 +597,44 @@ strong, b {
     border-top-right-radius: 0.2rem;
 }
 
-#News {
+.News-link {
     background-color: rgba(255,164,0,0.75);
 }
 
-#Social {
+.Social-link {
     background-color: rgba(77,144,240,0.75);
 }
 
-#Careers {
+.Careers-link {
     background-color: rgba(0,189,57,0.75);
 }
 
-#Tech {
+.Tech-link {
     background-color: rgba(240,77,77,0.75);
 }
 
-#Beta {
+.Beta-link {
     background-color: rgba(151,2,167,0.75);
 }
 
 
-#news:hover {
+.News-link:hover {
     background-color: #FFA400;
 }
 
-#social:hover {
+.Social-link:hover {
     background-color: #4D90F0;
 }
 
-#careers:hover {
+.Careers-link:hover {
     background-color: #00BD39;
 }
 
-#tech:hover {
+.Tech-link:hover {
     background-color: #F04D4D;
 }
 
-#beta:hover {
+.Beta-link:hover {
     background-color: #9702A7;
 }
 
@@ -686,7 +692,7 @@ tr {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100%;
-    background-position: bottom 3rem;
+    background-position: right 0 bottom -3rem;
     height: 4rem;
 }
 
