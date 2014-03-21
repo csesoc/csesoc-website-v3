@@ -4,24 +4,18 @@
     
     {% if branch_level == 0 %}
     <ul class="nav-dropdown ham-menu">
-
-            <li class="ham-small-only">
-                <a href="/" class="menu-link">
-                    <span class="menu-item">Home</span>
-                </a>
-            </li>
-            <li class="ham-small-only">
+            <li>
                 <a href="http://beta.csesoc.unsw.edu.au" class="menu-link">
                     <span class="menu-item">Beta</span>
                 </a>
             </li>
-            <li class="ham-small-only">
+            <li>
                 <a href="http://compclub.com.au" class="menu-link">
                     <span class="menu-item">Comp Club</span>
                 </a>
             </li>
             {% for page in page_branch %}
-            {% if not has_home and page.is_primary and forloop.first %}
+            {% if not has_home and page.is_primary and forloop.first and 0 %}
             <li class="ham-small-only">
                 <a href="{% url "home" %}" class="menu-link">
                     <span class="menu-item">{% trans "Home" %}</span>
@@ -30,10 +24,11 @@
             {% endif %}
             {% if page.in_menu %}
             <li>
-                <a href="#" class="menu-link">
+                <a href="{{ page.get_absolute_url }}" class="menu-link">
                     <span class="menu-item">{{ page.title }}</span>
                 </a>
-                 {% if page.has_children_in_menu %}{% page_menu page %}{% endif %}
+
+                 {% if page.has_children_in_menu %}<span class="caret-container"><div class="caret"></div></span>{% page_menu page %}{% endif %}
             </li>
             {% endif %}
             {% endfor %}
