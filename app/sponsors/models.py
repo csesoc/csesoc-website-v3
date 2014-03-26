@@ -10,5 +10,6 @@ class Sponsor(models.Model):
     start_date 	= models.DateField(auto_now_add=True, editable=False)
     expiry_date = models.DateField()
     alt_text 	= models.CharField(max_length=200)
+    in_side_bar = models.BooleanField(default=True)
     def __unicode__(self):
         return self.name
