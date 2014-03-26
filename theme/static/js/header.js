@@ -84,6 +84,7 @@ function titleZoom(scrollTop) {
     var bgAlpha;
     var photoPos;
     var navBarPos;
+    var titlePos;
 
     var width = $(window).width();
     // var photoHeight = 2 * width / 3;
@@ -95,12 +96,16 @@ function titleZoom(scrollTop) {
         bgAlpha = 0.75;
         photoPos = (photoHeight / 2) - navPos/2;
         navBarPos = 2;
+        titlePos = 2;
+        $("#page-heading").css("font-weight", "100");
     } else if (scrollTop >= navPos || $(".feature").css("display") == "none") {
         // sticky navbar
         fontSize = 18;
         bgAlpha = 0;
         photoPos = (photoHeight / 2) - navBarHeight/2;
-        navBarPos = 10;
+        navBarPos = 12;
+        titlePos = 4;
+        $("#page-heading").css("font-weight", "300");
     } else {
         // in between
         // fontSize = -54/256 * scrollTop + 72; // linear
@@ -108,13 +113,16 @@ function titleZoom(scrollTop) {
         fontSize = Math.pow(scrollTop-navPos, 2)/(Math.pow(navPos, 2)/54) + 18; // parabolic
         bgAlpha = -Math.pow(scrollTop, 2)/(Math.pow(navPos, 2)/0.75) + 0.75;
         photoPos = (photoHeight / 2) - (-96/navPos * scrollTop + navPos/2);
-        navBarPos = 8/navPos * scrollTop + 2; // linear
+        navBarPos = 10/navPos * scrollTop + 2; // linear
+        titlePos = 2/navPos * scrollTop + 2;
+        $("#page-heading").css("font-weight", "100");
     }
     
     $("#page-heading").css("font-size", fontSize.toString() + "pt");
     $("#title").css("background-color", "rgba(255,255,255,"+bgAlpha.toString()+")");
     $(".photo").css("background-position", "0 -"+photoPos.toString()+"px");
     $("#navigation").css("padding-left", navBarPos.toString() + "rem");
+    $("#title").css("padding-left", titlePos.toString() + "rem");
 }
 
 function subtitleFade(scrollTop) {
