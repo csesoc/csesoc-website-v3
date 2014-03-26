@@ -61,11 +61,15 @@
     <div class="wrapper">
     <!-- HEADER -->
 
-    <a href="/" class="nolink"><div class='feature photo show-for-medium-up'>
-        <div id='subtitle' class="medium-10">
+    <div style="position: relative;" class="show-for-medium-up">
+        <a href="/"><div class="title-link"></div></a>
+    </div>
+    
+    <div class='feature photo show-for-medium-up row'>
+        <div id='subtitle' class="medium-11">
             UNSW Computer Science and Engineering Society
         </div>
-        <div id='buttons'>
+        <div id='buttons' class="medium-1">
             <a href="http://beta.csesoc.unsw.edu.au"><div>Beta</div></a>
             <a href="http://compclub.com.au"><div>Comp Club</div></a>
         </div>
@@ -75,7 +79,7 @@
         <div id='title'>
             <h1 id='page-heading'>CSESoc</h1>
         </div>
-    </a></a>
+    </a>
 
     <div id="navbar"> 
     <div id="scroller-anchor"></div> 
@@ -83,21 +87,22 @@
         <div id="navigation">
             <div class="nav-large hide-for-small-only">
                 <div id="nav-wrapper">
+                    <img class="navbar-logo" src="{% static "img/logo-navbar.png" %}">
                     {% page_menu "pages/menus/dropdown.html" %}
                 </div>
-                <div id="social-links" class="clearfix">
-                    <a href="https://www.facebook.com/csesoc">
+                <div class="clearfix social-links">
+                    <a href="https://www.facebook.com/csesoc" target="_blank">
                         <div class="facebook social-link">
                             <div class="social-wrapper">
-                                <img src="{% static "img/fbook.png" %}" class="social-badge-fb"></img>
+                                <img alt="Facebook Logo" src="{% static "img/fbook.png" %}" class="social-badge-fb">
                                 <div class="clearfix">Facebook</div>
                             </div>
                         </div>
                     </a>
-                    <a href="https://plus.google.com/101220554982256575482">
+                    <a href="https://plus.google.com/101220554982256575482" target="_blank">
                         <div class="google social-link">
                             <div class="social-wrapper">
-                                <img src="{% static "img/gplus.png" %}" class="social-badge gp"></img>
+                                <img alt="Google+ Logo" src="{% static "img/gplus.png" %}" class="social-badge gp">
                                 <div class="clearfix">Google</div>
                             </div>
                         </div>
@@ -117,7 +122,7 @@
 </div>
 <div id="nav-padding"></div>
 
-{% block categories %}
+{% block categories_large %}
 {% endblock %}
 
 <div id="content">
@@ -138,7 +143,8 @@
                 <div id="alerts"></div>
             {% endnevercache %}
 
-            <h1>{% block title %}{% endblock %}</h1>
+
+            
 
             <!--
             <ul class="breadcrumb">
@@ -152,10 +158,20 @@
     {% endif %}
     <div class="row">
         <div class="medium-9 columns">
-        {% block main %}{% endblock %}
+            {% block categories_small %}
+            {% endblock %}
+            {% if page.html_id %}
+            <div class="card">
+            <h1>{% block title %}{% endblock %}</h1>
+            {% endif %}
+            {% block main %}{% endblock %}
+            {% if page.html_id %}
+            </div>
+            {% endif %}
         </div>
-        <div class="medium-3 columns">
-            <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
+        <div class="medium-3 columns card" style="height: 64rem;">
+            <h4>Sponsors</h4>
+            <p>Placeholder</p>
         </div>
     </div>
 

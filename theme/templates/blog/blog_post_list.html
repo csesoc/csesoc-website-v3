@@ -23,8 +23,8 @@
 {% endif %}
 {% endblock %}
 
-{% block categories %}
-<div id="categories">
+{% block categories_large %}
+<div id="categories-large" class="categories">
     <h3>Categories</h3>
     <div>
         <!-- {% with something as categories %}
@@ -34,11 +34,31 @@
         {% endfor %}
         {% endif %}
         {% endwith %} -->
-        <div class="category" id="News">News</div>
-        <div class="category" id="Social">Social</div>
-        <div class="category" id="Careers">Careers</div>
-        <div class="category" id="Tech">Tech</div>
-        <div class="category" id="Beta">Beta</div>
+        <div class="category News-link" >News</div>
+        <div class="category Social-link">Social</div>
+        <div class="category Careers-link">Careers</div>
+        <div class="category Tech-link">Tech</div>
+        <div class="category Beta-link">Beta</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block categories_small %}
+<div id="categories-small" class="categories">
+    <h3>Categories</h3>
+    <div>
+        <!-- {% with something as categories %}
+        {% if categories %}
+        {% for category in categories %}
+        <div class="category" id="{{ category }}">{{ category }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %} -->
+        <div class="category News-link" >News</div>
+        <div class="category Social-link">Social</div>
+        <div class="category Careers-link">Careers</div>
+        <div class="category Tech-link">Tech</div>
+        <div class="category Beta-link">Beta</div>
     </div>
 </div>
 {% endblock %}
@@ -73,7 +93,7 @@
 
 {% for blog_post in blog_posts.object_list %}
 {% editable blog_post.publish_date %}
-<h6 class="post-meta">
+<h6>
     {% blocktrans with sometime=blog_post.publish_date|date:"j F Y" %}{{ sometime }}{% endblocktrans %}
 </h6>
 {% endeditable %}
