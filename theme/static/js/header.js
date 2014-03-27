@@ -1,3 +1,7 @@
+/*
+    Written by Owen Cassidy in Q1 2014, mostly 27/03/14 - 28/03/14
+*/
+
 /**
      ######   ######  ########   #######  ##       ##       
     ##       ##    ## ##     ## ##     ## ##       ##       
@@ -10,7 +14,6 @@ var navBarHeight = $(".scroller").height();
 $(window).resize(function() {
     navPos = $("#scroller-anchor").offset().top;
     navBarHeight = $(".scroller").height();
-
 });
 
 /**
