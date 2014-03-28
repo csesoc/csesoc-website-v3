@@ -126,6 +126,7 @@ function stickyNav() {
 }
 
 $(document).scroll(stickyNav);
+$(document).ready(stickyNav);
 
 
 
