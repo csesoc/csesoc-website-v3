@@ -14,20 +14,19 @@ admin.autodiscover()
 
 urlpatterns = patterns("",
 
-    url(r'^sponsors$', 'app.sponsors.views.sponsors'),
-
     # Login for zIDs, NOT admin. This is only a temporary solution
     # because later, CSESoc's execs will be given admin permission
     # and will need to auth via LDAP too.
-    url(r'^signin$', direct_to_template,
-        {'template': 'auth/login.html'},
-        name='signin'
-        ),
+    url(r'^signin$', direct_to_template, {'template': 'signin/signin.html'}, name='signin'),
     url(r'^zlogin$', 'app.auth.views.signin'),
     url(r'^zlogout$', 'app.auth.views.signout'),
 
-    url(r'^sponsors$', 'app.sponsors.views.sponsors'),
+    # Timetable importer
     url(r'^timetable-importer$', 'app.timetable.views.show'),
+    # Sponsors
+    url(r'^sponsors$', 'app.sponsors.views.sponsors'),
+
+    ("^pagedown/", include(mezzanine_pagedown.urls)),
 
     (r'^static/(?P<path>.*)$',
      'django.views.static.serve',
