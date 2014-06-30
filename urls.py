@@ -23,13 +23,13 @@ urlpatterns = patterns("",
         {'template': 'auth/login.html'},
         name='signin'
         ),
-    url(r'^zlogin$', 'auth.views.signin'),
-    url(r'^zlogout$', 'auth.views.signout'),
+    url(r'^zlogin$', 'app.auth.views.signin'),
+    url(r'^zlogout$', 'app.auth.views.signout'),
 
     ("^pagedown/", include(mezzanine_pagedown.urls)),
-    url(r'^join_a_team$', 'teams.views.join_a_team'),
-    url(r'^join/([^\/]*)[\/]?$', 'teams.views.join'),
-    url(r'^leave/([^\/]*)[\/]?$', 'teams.views.leave'),
+    url(r'^join_a_team$', 'app.teams.views.join_a_team'),
+    url(r'^join/([^\/]*)[\/]?$', 'app.teams.views.join'),
+    url(r'^leave/([^\/]*)[\/]?$', 'app.teams.views.leave'),
     #    direct_to_template,
     #        {'template': 'teams/teams.html'},
     #        name='teams'

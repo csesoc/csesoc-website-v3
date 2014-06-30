@@ -44,3 +44,5 @@ To start the server, run
 $ python manage.py runserver
 ```
 Enjoy!
+
+PSA: Use 4 space SPACE INDENTATION! This is Python! Whitespace is important!
