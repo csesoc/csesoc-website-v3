@@ -26,15 +26,15 @@ urlpatterns = patterns("",
     url(r'^zlogin$', 'app.auth.views.signin'),
     url(r'^zlogout$', 'app.auth.views.signout'),
 
-    ("^pagedown/", include(mezzanine_pagedown.urls)),
-    url(r'^join_a_team$', 'app.teams.views.join_a_team'),
-    url(r'^join/([^\/]*)[\/]?$', 'app.teams.views.join'),
-    url(r'^leave/([^\/]*)[\/]?$', 'app.teams.views.leave'),
-    #    direct_to_template,
-    #        {'template': 'teams/teams.html'},
-    #        name='teams'
-    #        ),
+    url(r'^sponsors$', 'app.sponsors.views.sponsors'),
+    url(r'^timetable-importer$', 'app.timetable.views.show'),
 
+    (r'^static/(?P<path>.*)$',
+     'django.views.static.serve',
+     {'document_root':
+         local_settings.STATIC_ROOT.rstrip('/')
+     }
+    ),
 
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.

@@ -15,4 +15,5 @@ requests==2.2.0
 requests-oauthlib==0.4.0
 six==1.5.2
 wsgiref==0.1.2
-future==0.10.2
+google-api-python-client==1.1
+BeautifulSoup
