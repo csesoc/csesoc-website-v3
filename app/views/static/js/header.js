@@ -56,8 +56,8 @@ function setPhoto(photoNum) {
     photoHeightModifier = photo[height];
     // photoHeightModifier = 5/7;
     
-    $(".photo").css("background-image", "url(/static/img/"+photo[name]+")");
-    $(".footer-photo").css("background-image", "url(/static/img/"+photo[name]+")");
+    $(".photo").css("background-image", "url(/app/views/static/img/"+photo[name]+")");
+    $(".footer-photo").css("background-image", "url(/app/views/static/img/"+photo[name]+")");
 
     photoPositionTransition();
 
