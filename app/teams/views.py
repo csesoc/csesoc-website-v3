@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django.http import HttpResponse
 
 
-def join_a_team(request):
+def mailinglist(request):
     redirect_path = (request.REQUEST.get('redirect', '/'))
     if request.user.is_authenticated():
         # Each team is of the form (title, truename, description).
@@ -22,7 +22,7 @@ def join_a_team(request):
         )
 
         h = httplib.HTTPConnection('cgi.cse.unsw.edu.au')
-        h.request('GET', '/~csesoc/mailingLists?cseid=' + request.user.profile.cselogin)
+        h.request('GET', '/~csesoc/mailingLists?cseid=' + request.user.username)
         teams_joined = h.getresponse().read().split(',')
 
         joined_teams = ((team[0], team[1], team[2], team[1] in teams_joined) for team in teams)

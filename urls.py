@@ -24,16 +24,22 @@ urlpatterns = patterns("",
     # Timetable importer
     url(r'^timetable-importer/?$', 'app.timetable.views.show'),
 
-    # camp leader applications
+    # Teams
+    url(r'^teams/join/?$', 'app.teams.views.mailinglist'),
+
+    # Camp leader applications
     url(r'^camp/apply/?$', 'app.camp.campleaders.views.apply'),
-    # camp attendee applications
+    # Camp attendee applications    
     url(r'^camp/signup/$', 'app.camp.campattendees.views.signup'),
-    # url(r'^camp/signup/?$', 'app.camp.campattendees.views.close'),
+    url(r'^camp/close/?$', 'app.camp.campattendees.views.close'),
     url(r'^camp/music/?$', 'app.camp.campattendees.views.music'),
 
     # Finance
     url(r'^finance/thanks/(?P<invoice_number>[0-9]{8})/?$', 'app.finance.views.invoice_thanks'),
     url(r'^finance/(?P<invoice_number>[0-9]{8})/(?P<hash>[0-9a-zA-Z]+)/?$', 'app.finance.views.invoice_detail'),
+
+    # Merch
+    url(r'^merch/hoodies', 'app.merch.views.hoodies'),
 
     # Sponsors
     url(r'^sponsors$', 'app.sponsors.views.sponsors'),

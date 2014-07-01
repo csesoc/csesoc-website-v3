@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import RequestContext
-from app.hs.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.forms import ModelForm,Textarea
 from django.core.mail import send_mail
