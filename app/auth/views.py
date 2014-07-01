@@ -19,9 +19,9 @@ def signin(request):
          return redirect(redirect_path)
       else:
          messages.error(request, "Invalid login.")
-         return render_to_response('auth/login.html', {'redirect_path': redirect_path}, context_instance=RequestContext(request), user=user)
+         return render_to_response('auth/login.html', {'redirect_path': redirect_path}, context_instance=RequestContext(request))
    else:
-      return render_to_response('auth/login.html', {'redirect_path': redirect_path}, context_instance=RequestContext(request), user=user)
+      return render_to_response('auth/login.html', {'redirect_path': redirect_path}, context_instance=RequestContext(request))
 
 def signout(request):
    logout(request)

@@ -17,12 +17,24 @@ urlpatterns = patterns("",
     # Login for zIDs, NOT admin. This is only a temporary solution
     # because later, CSESoc's execs will be given admin permission
     # and will need to auth via LDAP too.
-    url(r'^signin$', direct_to_template, {'template': 'signin/signin.html'}, name='signin'),
-    url(r'^zlogin$', 'app.auth.views.signin'),
-    url(r'^zlogout$', 'app.auth.views.signout'),
+    url(r'^signin/?$', direct_to_template, {'template': 'auth/login.html'}, name='signin'),
+    url(r'^zlogin/?$', 'app.auth.views.signin'),
+    url(r'^zlogout/?$', 'app.auth.views.signout'),
 
     # Timetable importer
-    url(r'^timetable-importer$', 'app.timetable.views.show'),
+    url(r'^timetable-importer/?$', 'app.timetable.views.show'),
+
+    # camp leader applications
+    url(r'^camp/apply/?$', 'app.camp.campleaders.views.apply'),
+    # camp attendee applications
+    url(r'^camp/signup/$', 'app.camp.campattendees.views.signup'),
+    # url(r'^camp/signup/?$', 'app.camp.campattendees.views.close'),
+    url(r'^camp/music/?$', 'app.camp.campattendees.views.music'),
+
+    # Finance
+    url(r'^finance/thanks/(?P<invoice_number>[0-9]{8})/?$', 'app.finance.views.invoice_thanks'),
+    url(r'^finance/(?P<invoice_number>[0-9]{8})/(?P<hash>[0-9a-zA-Z]+)/?$', 'app.finance.views.invoice_detail'),
+
     # Sponsors
     url(r'^sponsors$', 'app.sponsors.views.sponsors'),
 

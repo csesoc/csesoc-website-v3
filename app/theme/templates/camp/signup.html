@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block titlecontent %}CSESoc First Year Camp 2014 - Application Form{% endblock %}
+
+{% block main %}{% spaceless %}
+{% block stylesheets %}
+<script type='text/javascript' src='/assets/js/jquery.min.js'></script>
+
+<style>
+    th {vertical-align:middle;}
+    td {padding:10px;}
+</style>
+<script type='text/javascript'>
+    $(document).ready(function() {
+        $("#id_gender").change(loadShirtSize).each(loadShirtSize);
+        $("#id_student_number").attr("readonly", "readonly");
+        $('#id_age').each(function() {
+            widget = $("<input type='date' />").attr({ name: this.name, value: this.value})
+            widget.insertBefore(this);
+        }).remove();
+    });
+    function loadShirtSize() {
+        options = "";
+        update = true;
+        if($(this).val() == 'M') {
+          options += "<option value=\"S\">Small</option>";
+          options += "<option value=\"M\">Medium</option>";
+          options += "<option value=\"L\">Large</option>";
+          options += "<option value=\"XL\">Extra Large</option>";
+          options += "<option value=\"XXL\">XXL</option>";
+      } else if($(this).val() == 'F') {
+          options += "<option value=\"6\">6</option>";
+          options += "<option value=\"8\">8</option>";
+          options += "<option value=\"10\">10</option>";
+          options += "<option value=\"12\">12</option>";
+          options += "<option value=\"14\">14</option>";
+          options += "<option value=\"16\">16</option>";
+      } else {
+          update = false;
+      }
+
+      if (update) {
+          selected = $("#id_shirt_size").val();
+          $("#id_shirt_size").html(options);
+          $("#id_shirt_size").val(selected);
+      }
+  }
+</script>
+{% endblock %}
+As this is a camp, we will need a medical form from you. Please fill out <b><a href="/assets/media/medform.pdf">this form</a></b> and then upload it below.
+
+<div class='application_form camp_form'>
+    <form action="/camp/signup/" enctype="multipart/form-data" method="post">
+
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <div class='submit_button'>
+            <input class="button class btn btn-large" type="submit" value="Save Application" />
+        </div>
+    </form>
+</div>
+
+{% endspaceless %}{% endblock %}
+

@@ -18,3 +18,4 @@ wsgiref==0.1.2
 google-api-python-client==1.1
 BeautifulSoup
 future==0.10.2
+south
