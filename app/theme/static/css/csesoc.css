@@ -719,6 +719,15 @@ tr {
 }
 
 /* Teams page */
+button.warning:hover, button.warning:focus, .button.warning:hover, .button.warning:focus {
+    background-color: #ea7d10;
+}
+button.warning, .button.warning {
+    background-color: #f08a24;
+    border-color: #ea7d10;
+    color: white;
+}
+
 .team {
     position: relative;
     line-height: 25px;
@@ -728,10 +737,10 @@ tr {
 }
 
 .team > .team-button {
-    position: absolute;
     display: inline-block;
     width: 149px;
     margin-top: 15px;
+    margin-bottom: -1.25rem;
 }
 .team > .team-button > button {
     z-index: 0; /* scrolls underneath the top navbar (.scroller) */
@@ -800,19 +809,19 @@ margin: 0 auto -4em;
 height: 4em;
 }
 
-/*.sticky {  
-    position: absolute;  
-    width: 100%;  
-    left: 0;  
-    z-index: 100;  
-    border-top: 0;  
-} 
+/*.sticky {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    z-index: 100;
+    border-top: 0;
+}
 
-.sticky2 {  
-    position: fixed;  
-    width: 100%;  
-    left: 0;  
-    top: 350px;  
-    z-index: 100;  
-    border-top: 0;  
+.sticky2 {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 350px;
+    z-index: 100;
+    border-top: 0;
 } */

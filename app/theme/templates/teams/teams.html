@@ -13,7 +13,7 @@
             return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
         };
         $(document).ready( function () {
-            $('button.team-btn').click( function () {
+            $('button.team-button').click( function () {
                 $('.alert-box').remove();
                 if (typeof(alertTimeout) != "undefined") {
                     clearTimeout(alertTimeout);
@@ -44,13 +44,19 @@
                         }
 
                         // Successfully joined or left a team. Hence, toggle the button.
-                        button.toggleClass('btn-warning').toggleClass('btn-success');
+                        button.toggleClass('warning').toggleClass('success');
                         if (button.attr('verb') == 'join') {
                             button.attr('verb', 'leave');
                         } else {
                             button.attr('verb', 'join');
                         }
-                        button.text(button.attr('verb').capitalize() + ' ' + team);
+                        teamname = '';
+                        if (team == 'hs.team') {
+                            teamname = 'HS Team';
+                        } else {
+                            teamname = team.capitalize();
+                        }
+                        button.text(button.attr('verb').capitalize() + ' ' + teamname);
                     },
                     error: function(response){
                         console.log(response);
@@ -92,7 +98,7 @@
                     {% endcomment %}
                     <div class='visible-xs'><br /></div>
                     <div class='team-button'>
-                        <button type='button' id='{{ team.1 }}' verb='{% if team.3 %}leave{% else %}join{% endif %}' class='pull-right team-btn btn {% if team.3 %}btn-warning{% else %}btn-success{% endif %}'>{% if team.3 %}Leave{% else %}Join{% endif %} {{ team.0 }}</button>
+                        <button type='button' id='{{ team.1 }}' verb='{% if team.3 %}leave{% else %}join{% endif %}' class='{% if team.3 %}warning{% else %}success{% endif %} team-button btn'>{% if team.3 %}Leave{% else %}Join{% endif %} {{ team.0 }}</button>
                     </div>
                 </div>
             {% endfor %}
