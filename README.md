@@ -6,7 +6,7 @@ Lets remake the csesoc website
 ## Developer setup for Ubuntu
 ###Core packages
 ```
-$ sudo apt-get install git pip sqlite3 python-ldap
+$ sudo apt-get install git pip sqlite3 python-ldap libsasl2-dev libldap2-dev 
 ```
 
 ###Setting up virtualenv
