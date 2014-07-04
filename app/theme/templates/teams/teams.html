@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block meta_title %}Teams{% endblock %}
+
+{% block extra_head %}
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+
+    <script>
+        String.prototype.capitalize = function() {
+            return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+        };
+        $(document).ready( function () {
+            $('button.team-button').click( function () {
+                $('.alert-box').remove();
+                if (typeof(alertTimeout) != "undefined") {
+                    clearTimeout(alertTimeout);
+                }
+                button = $(this);
+                action = button.attr('verb'); // this is "join" or "leave"
+                team = button.attr('id'); // e.g. "Dev" or "HS Team"
+
+                if ($('.'+action+team).length) {
+                    $('.'+action+team).remove();
+                }
+
+                $.ajax({
+                    url: 'http://cgi.cse.unsw.edu.au/~csesoc/updateMailingLists',
+                    data: { action: action, team: team, cseid: {{user.profile.cselogin}} },
+                    dataType: 'jsonp',
+
+                    success: function(response){
+                        console.log(response);
+                        // {% comment %}
+                        //    (Rafi Blecher) sorry for the icky selectors. It's the easiest way to deal with
+                        //    the possibility of having spaces in team name (used as ID), like "HS Team"
+                        // {% endcomment %}
+                        if (action == "join") {
+                            $('<div data-alert class="alert-box team-msg success radius ' + action+team + '">Success!</div>').insertAfter($("[id='"+team+"']"));
+                        } else {
+                            $('<div data-alert class="alert-box team-msg warning radius ' + action+team + '">Success!</div>').insertAfter($("[id='"+team+"']"));
+                        }
+
+                        // Successfully joined or left a team. Hence, toggle the button.
+                        button.toggleClass('warning').toggleClass('success');
+                        if (button.attr('verb') == 'join') {
+                            button.attr('verb', 'leave');
+                        } else {
+                            button.attr('verb', 'join');
+                        }
+                        teamname = '';
+                        if (team == 'hs.team') {
+                            teamname = 'HS Team';
+                        } else {
+                            teamname = team.capitalize();
+                        }
+                        button.text(button.attr('verb').capitalize() + ' ' + teamname);
+                    },
+                    error: function(response){
+                        console.log(response);
+                        $('<div data-alert class="alert-box team-msg radius ' + action+team + '">Error!</div>').insertAfter($("[id='"+team+"']"));
+                    },
+                    complete: function() {
+                        $("[class*='" + action+team + "']").fadeOut(3000);
+                        alertTimeout = setTimeout( function () {
+                            $("[class*='" + action+team + "']").remove();
+                        }, 3000);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block main %}
+    <div id='content'>
+        <div class='news-card'>
+            <h1>Teams</h1>
+            <h2>You are {{user.profile.cselogin}}</h2>
+            {% for team in teams %}
+                {% comment %}
+                    team.0 is team name
+                    team.1 is truename
+                    team.2 is team description
+                    team.3 is whether or not they're subscribed
+                    Django templating engine is shit. It's not my fault!
+                {% endcomment %}
+                <div class='team'>
+                    <div class='team-description'>
+                        <a href='/teams/{{ team.1 }}'>{{ team.0 }} Team</a><br />
+                        {{ team.2 }}
+                    </div>
+                    {% comment %}
+                      Pretty dirty way of continuing over a line in mobiles. If you can think of a nicer
+                      way to do this, go ahead!
+                    {% endcomment %}
+                    <div class='visible-xs'><br /></div>
+                    <div class='team-button'>
+                        <button type='button' id='{{ team.1 }}' verb='{% if team.3 %}leave{% else %}join{% endif %}' class='{% if team.3 %}warning{% else %}success{% endif %} team-button btn'>{% if team.3 %}Leave{% else %}Join{% endif %} {{ team.0 }}</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div> <!-- #content -->
+{% endblock %}
+
+{% block footer_scripts %}
+
+    <!-- SCRIPTS -->
+
+    <script src='/static/csesoc/js/vendor/jquery.js'></script>
+    <script src='/static/csesoc/js/foundation.min.js'></script>
+
+    <script src='/static/csesoc/js/header.js' ></script>
+    <script src='/static/csesoc/js/jquery.dropdown.js'></script>
+
+    <script>
+        $(document).foundation();
+    </script>
+{% endblock %}
