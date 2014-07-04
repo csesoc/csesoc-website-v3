@@ -14,26 +14,34 @@ admin.autodiscover()
 
 urlpatterns = patterns("",
 
-    url(r'^sponsors$', 'app.sponsors.views.sponsors'),
-
     # Login for zIDs, NOT admin. This is only a temporary solution
     # because later, CSESoc's execs will be given admin permission
     # and will need to auth via LDAP too.
-    url(r'^signin$', direct_to_template,
-        {'template': 'auth/login.html'},
-        name='signin'
-        ),
-    url(r'^zlogin$', 'auth.views.signin'),
-    url(r'^zlogout$', 'auth.views.signout'),
+    url(r'^signin/?$', direct_to_template, {'template': 'auth/login.html'}, name='signin'),
+    url(r'^zlogin/?$', 'app.auth.views.signin'),
+    url(r'^zlogout/?$', 'app.auth.views.signout'),
+
+    # Timetable importer
+    url(r'^timetable-importer/?$', 'app.timetable.views.show'),
+
+    # Teams
+    url(r'^teams/join/?$', 'app.teams.views.mailinglist'),
+
+    # Camp attendee applications    
+    url(r'^camp/signup/$', 'app.camp.campattendees.views.signup'),
+    url(r'^camp/music/?$', 'app.camp.campattendees.views.music'),
+
+    # Finance
+    url(r'^finance/thanks/(?P<invoice_number>[0-9]{8})/?$', 'app.finance.views.invoice_thanks'),
+    url(r'^finance/(?P<invoice_number>[0-9]{8})/(?P<hash>[0-9a-zA-Z]+)/?$', 'app.finance.views.invoice_detail'),
+
+    # Merch
+    url(r'^merch/hoodies', 'app.merch.views.hoodies'),
+
+    # Sponsors
+    url(r'^sponsors$', 'app.sponsors.views.sponsors'),
 
     ("^pagedown/", include(mezzanine_pagedown.urls)),
-    url(r'^join_a_team$', 'teams.views.join_a_team'),
-    url(r'^join/([^\/]*)[\/]?$', 'teams.views.join'),
-    url(r'^leave/([^\/]*)[\/]?$', 'teams.views.leave'),
-    #    direct_to_template,
-    #        {'template': 'teams/teams.html'},
-    #        name='teams'
-    #        ),
 
     (r'^static/(?P<path>.*)$',
      'django.views.static.serve',

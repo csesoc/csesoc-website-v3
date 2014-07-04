@@ -3,5 +3,4 @@
 .DS_Store
 .coverage
 local_settings.py
-
-soc-website.db
+app/theme/static/media/

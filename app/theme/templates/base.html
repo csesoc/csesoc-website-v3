@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+{% load pages_tags mezzanine_tags i18n future staticfiles blog_tags %}
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{% endblock %}">
+
+    <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+
+    <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+
+    {% ifinstalled mezzanine.blog %}
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+    {% endifinstalled %}
+
+    {% compress css %}
+        <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
+        <link rel="stylesheet" href="{% static "css/normalize.css" %}">
+        <link rel="stylesheet" href="{% static "css/foundation.css" %}">
+        <link rel='stylesheet' href="{% static "css/csesoc.css" %}">
+
+        {% if LANGUAGE_BIDI %}
+            <link rel="stylesheet" href="{% static "css/rtl.css" %}">
+        {% endif %}
+        {% ifinstalled cartridge.shop %}
+            <link rel="stylesheet" href="{% static "css/cartridge.css" %}">
+            {% if LANGUAGE_BIDI %}
+            <link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
+            {% endif %}
+        {% endifinstalled %}
+        {% block extra_css %}{% endblock %}
+    {% endcompress %}
+
+    {% compress js %}
+        <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
+        <script src='{% static 'js/vendor/custom.modernizr.js' %}'></script>
+        <script src="{% static "js/modernizr.js" %}"></script>
+        {% block extra_js %}{% endblock %}
+    {% endcompress %}
+    {% include "includes/header_scripts.html" %}
+    <!--[if lt IE 9]>
+    <script src="{% static "js/html5shiv.js" %}"></script>
+    <script src="{% static "js/respond.min.js" %}"></script>
+    <![endif]-->
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body id="{% block body_id %}body{% endblock %}">
+    <div class="wrapper">
+    <!-- HEADER -->
+
+    <div style="position: relative;" class="show-for-medium-up">
+        <a href="/"><div class="title-link"></div></a>
+    </div>
+    
+    <div class='feature photo show-for-medium-up row'>
+        <div id='subtitle' class="medium-11">
+            UNSW Computer Science and Engineering Society
+        </div>
+        <div id='buttons' class="medium-1">
+            <a href="http://beta.csesoc.unsw.edu.au"><div>&beta;eta</div></a>
+            <a href="http://compclub.com.au"><div>Comp Club</div></a>
+        </div>
+    </div>
+
+    <a href='/'>
+        <div id='title'>
+            <h1 id='page-heading'>CSESoc</h1>
+        </div>
+    </a>
+
+    <div id="navbar"> 
+    <div id="scroller-anchor"></div> 
+    <div class="scroller photo"> 
+        <div id="navigation">
+            <div class="nav-large">
+                <div id="nav-wrapper">
+                    <img class="navbar-logo" src="{% static "img/logo-navbar.png" %}">
+                    {% page_menu "pages/menus/dropdown.html" %}
+                </div>
+                <div class="clearfix social-links">
+                    <a href="https://www.facebook.com/csesoc" target="_blank">
+                        <div class="facebook social-link">
+                            <div class="social-wrapper">
+                                <img alt="Facebook Logo" src="{% static "img/fbook.png" %}" class="social-badge-fb">
+                                <div class="clearfix">Facebook</div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="https://plus.google.com/101220554982256575482" target="_blank">
+                        <div class="google social-link">
+                            <div class="social-wrapper">
+                                <img alt="Google+ Logo" src="{% static "img/gplus.png" %}" class="social-badge gp">
+                                <div class="clearfix">Google</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="nav-small">
+            <img class="navbar-logo-small" src="{% static "img/logo-navbar.png" %}">
+                <div id="hamburger" class="dropdown clearfix">
+                    <div class="slice"></div>
+                    <div class="slice"></div>
+                    <div class="slice"></div>
+                    {% page_menu "pages/menus/dropdown_ham.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="nav-padding"></div>
+
+{% block categories_large %}
+{% endblock %}
+
+<div id="content">
+    {% if page.html_id %}
+    <div class="row">
+        <div class="container medium-12">
+            {% nevercache %}
+            {% if messages %}
+                <div class="messages">
+                {% for message in messages %}
+                <div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ message }}
+                </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+                <div id="alerts"></div>
+            {% endnevercache %}
+        </div>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="large-9 medium-9 small-12 columns">
+            {% block categories_small %}
+            {% endblock %}
+            {% if page.html_id %}
+            <div class="card">
+            <h1>{% block title %}{% endblock %}</h1>
+            {% endif %}
+            {% block main %}{% endblock %}
+            {% if page.html_id %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="large-3 medium-3 small-12 columns card" style="height: 64rem;">
+            <h4>Sponsors</h4>
+            {% load sponsor_tags %}
+            {% list_sponsors %}
+        </div>
+    </div>
+</div>
+<div class="push"></div>
+</div>
+
+    <!-- FOOTER -->
+
+    <div class='footer-photo footer'>
+        <div id='footer'>
+            <span>
+                &copy; Copyright 2013 CSESoc
+            </span>
+        </div>
+    </div>
+
+    {% include "includes/footer_scripts.html" %}
+
+    {% block footer_scripts %}{% endblock %}
+
+</body>
+</html>

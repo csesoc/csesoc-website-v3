@@ -147,7 +147,7 @@ TEMPLATE_LOADERS = (
 
 AUTHENTICATION_BACKENDS = (
     "mezzanine.core.auth_backends.MezzanineBackend",
-    'auth.ldap_auth.ldapBackend',
+    'app.auth.ldap_auth.ldapBackend',
 )
 
 # List of finder classes that know how to find static files in
@@ -209,7 +209,7 @@ NEVERCACHE_KEY = "f57f7b5c-bb1c-4302-bef5-26b6b3b43f2de9495caf-1f02-47ef-addb-48
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = "/static/"
+STATIC_URL = "/app/theme/static/"
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -233,7 +233,7 @@ ROOT_URLCONF = "%s.urls" % PROJECT_DIRNAME
 # or "C:/www/django/templates".
 # Always use forward slashes, even on Windows.
 # Don't forget to use absolute paths, not relative paths.
-TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
+TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "app/theme/templates"),)
 
 
 ################
@@ -241,7 +241,14 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 ################
 
 INSTALLED_APPS = (
-    "theme",
+    "app.theme",
+    'app.sponsors',
+    'app.auth',
+    'app.teams',
+    'app.timetable',
+    'app.camp.campattendees',
+    'app.finance',
+    'app.merch',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -260,11 +267,12 @@ INSTALLED_APPS = (
     "mezzanine.galleries",
     "mezzanine.twitter",
     "mezzanine_pagedown",
-    'app.sponsors',
-    'auth',
     #"mezzanine.accounts",
     #"mezzanine.mobile",
+    'south',
 )
+
+PAYPAL_RECEIVER_EMAIL = "csesoc@cse.unsw.edu.au"
 
 RICHTEXT_WIDGET_CLASS = 'mezzanine_pagedown.widgets.PageDownWidget'
 RICHTEXT_FILTER = 'mezzanine_pagedown.filters.custom'
