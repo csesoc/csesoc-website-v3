@@ -27,11 +27,8 @@ urlpatterns = patterns("",
     # Teams
     url(r'^teams/join/?$', 'app.teams.views.mailinglist'),
 
-    # Camp leader applications
-    url(r'^camp/apply/?$', 'app.camp.campleaders.views.apply'),
     # Camp attendee applications    
     url(r'^camp/signup/$', 'app.camp.campattendees.views.signup'),
-    url(r'^camp/close/?$', 'app.camp.campattendees.views.close'),
     url(r'^camp/music/?$', 'app.camp.campattendees.views.music'),
 
     # Finance

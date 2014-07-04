@@ -247,7 +247,6 @@ INSTALLED_APPS = (
     'app.teams',
     'app.timetable',
     'app.camp.campattendees',
-    'app.camp.campleaders',
     'app.finance',
     'app.merch',
     "django.contrib.admin",
