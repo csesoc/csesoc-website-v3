@@ -4,7 +4,7 @@ from django.contrib import admin
 from mezzanine.core.views import direct_to_template
 
 import local_settings
-
+import mezzanine_pagedown.urls
 
 admin.autodiscover()
 
@@ -12,8 +12,9 @@ admin.autodiscover()
 # You can also change the ``home`` view to add your own functionality
 # to the project's homepage.
 
-urlpatterns = patterns(
-    "",
+urlpatterns = patterns("",
+
+    url(r'^sponsors$', 'app.sponsors.views.sponsors'),
 
     # Login for zIDs, NOT admin. This is only a temporary solution
     # because later, CSESoc's execs will be given admin permission
@@ -25,6 +26,7 @@ urlpatterns = patterns(
     url(r'^zlogin$', 'auth.views.signin'),
     url(r'^zlogout$', 'auth.views.signout'),
 
+    ("^pagedown/", include(mezzanine_pagedown.urls)),
     url(r'^join_a_team$', 'teams.views.join_a_team'),
     url(r'^join/([^\/]*)[\/]?$', 'teams.views.join'),
     url(r'^leave/([^\/]*)[\/]?$', 'teams.views.leave'),
@@ -52,7 +54,7 @@ urlpatterns = patterns(
     # one homepage pattern, so if you use a different one, comment this
     # one out.
 
-    url("^$", direct_to_template, {"template": "index.html"}, name="home"),
+    #url("^$", direct_to_template, {"template": "index.html"}, name="home"),
 
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------
@@ -77,7 +79,7 @@ urlpatterns = patterns(
     # ``settings.py`` module, and delete the blog page object from the
     # page tree in the admin if it was installed.
 
-    # url("^$", "mezzanine.blog.views.blog_post_list", name="home"),
+    url("^$", "mezzanine.blog.views.blog_post_list", name="home"),
 
     # MEZZANINE'S URLS
     # ----------------
