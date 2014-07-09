@@ -1,76 +1,122 @@
-// this never changes so only check for it once
+/*
+    Written by Owen Cassidy in Q1 2014, mostly 27/03/14 - 28/03/14
+*/
+
+/**
+     ######   ######  ########   #######  ##       ##       
+    ##       ##    ## ##     ## ##     ## ##       ##       
+     ######  ##       ########  ##     ## ##       ##       
+          ## ##    ## ##    ##  ##     ## ##       ##       
+     ######   ######  ##     ##  #######  ######## ######## 
+*/
 var navPos = $("#scroller-anchor").offset().top;
 var navBarHeight = $(".scroller").height();
-var photoHeightModifier;
-var photos =  [
-    {name: "balloons.jpg", height: 1/5},
-    {name: "camp.jpg", height: 25/40},
-    {name: "firstyear2013-01.jpg", height: 27/36},
-    {name: "firstyear2013-02.jpg", height: 1/3},
-    // {name: "logo.jpg", height: 1/2},
-    {name: "csesoc.jpg", height: 5/7},
-    {name: "luke.jpg", height: 2/3},
-    {name: "party.jpg", height: 2/5},
-    {name: "rainy-bbq.jpg", height: 1/3},
-    {name: "sand.jpg", height: 2/3},
-    {name: "seminar.jpg", height: 3/4},
-    {name: "spongebob.jpg", height: 1/2},
-    {name: "trivia.jpg", height: 3/5}
-];
+$(window).resize(function() {
+    navPos = $("#scroller-anchor").offset().top;
+    navBarHeight = $(".scroller").height();
+});
 
-function photoPositionTransition() {
+/**
+    Function that returns an object to help with finding scroll values
+    Object has the following properties:
+
+    obj.startValue - the inital value
+    obj.endValue - the final value
+    obj.midValue(scrollTop) - an interim value given the scroll position
+    obj.value(scrollTop) - the value given the scroll position
+*/
+function getScrollObject(startValue, endValue, isParabolic) {
+    var scrollObject = new Object();
+    var midFunction;
+    if (isParabolic) {
+        // A parabolic curve between startValue and endValue
+        midFunction = function(scrollTop) {
+            return Math.pow(scrollTop-navPos, 2)/(Math.pow(navPos, 2)/(this.startValue-this.endValue)) + this.endValue;
+        };
+    } else {
+        // A linear curve between startValue and endValue
+        midFunction = function(scrollTop) {
+            return (this.endValue - this.startValue)/navPos * scrollTop + this.startValue;
+        };
+    }
+
+    scrollObject.startValue = startValue;
+    scrollObject.endValue = endValue;
+    scrollObject.midValue = midFunction;
+
+    scrollObject.value = function(scrollTop) {
+        if (scrollTop <= 0 && $(".feature").css("display") != "none") {
+            // we're at or before (it can happen) the top of the page
+            return this.startValue;
+        } else if (scrollTop >= navPos || $(".feature").css("display") == "none") {
+            // we're at or after the end of the header
+            return this.endValue;
+        } else {
+            // we're between, where things change
+            return this.midValue(scrollTop);
+        }
+    };
+
+    return scrollObject;
+}
+
+
+/**
+    These objects are determined at the start, and set globally,
+    because they never change.
+*/
+var pageHeadingSizeScroll = getScrollObject(72, 18, true);
+var titleBackgroundScroll = getScrollObject(0.75, 0, true);
+var navigationPaddingScroll = getScrollObject(2, 12, false);
+var titlePaddingScroll = getScrollObject(2, 4.5, true);
+var subtitleColorScroll = getScrollObject(1, -2, false);
+
+
+/**
+    Function to organise the changing on scroll of various elements
+*/
+function scrollChanger() {
     var scrollTop = $(document).scrollTop();
-    var photoPos;
 
-    var width = $(window).width();
-    // var photoHeight = 2 * width / 3;
-    var photoHeight = width * photoHeightModifier;
+    if ($(window).height() < $(document).height()) {
+        $("#page-heading").css("font-size", pageHeadingSizeScroll.value(scrollTop) + "pt");
+        $("#title").css("background-color", "rgba(255,255,255," + titleBackgroundScroll.value(scrollTop) + ")");
+        $("#navigation").css("padding-left", navigationPaddingScroll.value(scrollTop) + "rem");
+        $("#title").css("padding-left", titlePaddingScroll.value(scrollTop) + "rem");
+        $("#subtitle").css("color", "rgba(0,0,0," + subtitleColorScroll.value(scrollTop) + ")");
 
-    if (scrollTop <= 0 && $(".feature").css("display") != "none") {
-        // full header
-        photoPos = (photoHeight / 2) - navPos/2;
-    } else if (scrollTop >= navPos || $(".feature").css("display") == "none") {
-        // sticky navbar
-        photoPos = (photoHeight / 2) - navBarHeight/2;
-    } else {
-        // in between
-        photoPos = (photoHeight / 2) - (-96/navPos * scrollTop + navPos/2);
+        // Title font weight, changes discretely, not continuously, so do it seperately
+        if (scrollTop >= navPos || $(".feature").css("display") == "none") { // After the end of the header
+            $("#page-heading").css("font-weight", "300");
+        } else {
+            $("#page-heading").css("font-weight", "100");
+        }
     }
-
-    $(".photo").css("background-position", "0 -"+photoPos.toString()+"px");
 }
 
-function setPhoto(photoNum) {
-    var name = "name";
-    var height = "height";
-    
-    var photo;
-    if (photoNum == -1) {
-        var photo = photos[Math.floor(Math.random()*photos.length)];
-    } else {
-        var photo = photos[photoNum];
-    }
+$(document).ready(scrollChanger);
+// As things can change as it resizes and as it scrolls,
+// run the function on both.
+$(document).scroll(scrollChanger);
+$(window).resize(scrollChanger);
 
-    console.log(photo);
 
-    photoHeightModifier = photo[height];
-    // photoHeightModifier = 5/7;
-    
-    $(".photo").css("background-image", "url(/app/theme/static/img/"+photo[name]+")");
-    $(".footer-photo").css("background-image", "url(/app/theme/static/img/"+photo[name]+")");
+/**
+    Function to control the sticky navbar
+*/
+function stickyNav() {
+    var scrollTop = $(document).scrollTop();
 
-    photoPositionTransition();
-
-}
-
-function stickyNav(scrollTop) {
     if (scrollTop>navPos  || $(".feature").css("display") == "none") {
+        // stick the navbar if we're below the header
+        // or if we're not showing the feature photo
         $(".scroller").css("position","fixed");
         $(".scroller").css("top", "0px");
         $(".scroller").css("background-attachment", "scroll");
         $("#nav-padding").show();
     } else {
         if (scrollTop<=navPos && $(".feature").css("display") != "none") {
+            // otherwise, unstick the navbar
             $(".scroller").css("position", "relative");
             $(".scroller").css("top", "");
             $(".scroller").css("background-attachment", "fixed");
@@ -79,133 +125,138 @@ function stickyNav(scrollTop) {
     }
 }
 
-function titleZoom(scrollTop) {
-    var fontSize;
-    var bgAlpha;
-    var photoPos;
-    var navBarPos;
-    var titlePos;
+$(document).scroll(stickyNav);
+$(document).ready(stickyNav);
 
-    var width = $(window).width();
-    // var photoHeight = 2 * width / 3;
-    var photoHeight = width * photoHeightModifier;
 
-    if (scrollTop <= 0 && $(".feature").css("display") != "none") {
-        // full header
-        fontSize = 72;
-        bgAlpha = 0.75;
-        photoPos = (photoHeight / 2) - navPos/2;
-        navBarPos = 2;
-        titlePos = 2;
-        $("#page-heading").css("font-weight", "100");
-    } else if (scrollTop >= navPos || $(".feature").css("display") == "none") {
-        // sticky navbar
-        fontSize = 18;
-        bgAlpha = 0;
-        photoPos = (photoHeight / 2) - navBarHeight/2;
-        navBarPos = 12;
-        titlePos = 4;
-        $("#page-heading").css("font-weight", "300");
-    } else {
-        // in between
-        // fontSize = -54/256 * scrollTop + 72; // linear
-        // y = (54/256^2)(x-256)^2 + 18 is a curve that has y-intercept 72 and is 18 at x=256 - i.e. has the desired endpoints
-        fontSize = Math.pow(scrollTop-navPos, 2)/(Math.pow(navPos, 2)/54) + 18; // parabolic
-        bgAlpha = -Math.pow(scrollTop, 2)/(Math.pow(navPos, 2)/0.75) + 0.75;
-        photoPos = (photoHeight / 2) - (-96/navPos * scrollTop + navPos/2);
-        navBarPos = 10/navPos * scrollTop + 2; // linear
-        titlePos = 2/navPos * scrollTop + 2;
-        $("#page-heading").css("font-weight", "100");
-    }
+
+
+/**
+    ########  ##     ##  #######  ########  #######  
+    ##     ## ##     ## ##     ##    ##    ##     ## 
+    ########  ######### ##     ##    ##    ##     ## 
+    ##        ##     ## ##     ##    ##    ##     ## 
+    ##        ##     ##  #######     ##     #######  
+*/
+
+/*
+    name: filename of image
+    center: the vertical aesthetic center of the image (between 0 and 1)
+    ratio: the approximate image aspect ratio (width / hight);
+*/
+name = "name";
+center = "center";
+ratio = "ratio";
+
+/**
+    A list of all the photos used
+
+    Aspect ratio *might* be possible to get programmatically
+    but it's easier this way.
+
+    Center is hand-picked. If you add another photo,
+    make sure to pick the center well. I did this with
+    trial and error.
     
-    $("#page-heading").css("font-size", fontSize.toString() + "pt");
-    $("#title").css("background-color", "rgba(255,255,255,"+bgAlpha.toString()+")");
-    $(".photo").css("background-position", "0 -"+photoPos.toString()+"px");
-    $("#navigation").css("padding-left", navBarPos.toString() + "rem");
-    $("#title").css("padding-left", titlePos.toString() + "rem");
+    1/5 is the smallest you can get with normal behaviour on
+    a 1280px-wide window. We're not likely to get smaller than
+    that these days (except mobile, which doesn't have parallax
+    scrolling on this site) so keep it above 1/5.
+*/
+
+var photos =  [
+    {name: "csesoc.jpg", center: 5/9, ratio: 4/3},
+    {name: "balloons.jpg", center: 1/5, ratio: 3/2},
+    {name: "camp.jpg", center: 1/2, ratio: 3/2},
+    {name: "firstyear2013-01.jpg", center: 4/7, ratio: 3/2},
+    {name: "firstyear2013-02.jpg", center: 1/2, ratio: 3/2},
+    {name: "luke.jpg", center: 6/11, ratio: 3/2},
+    {name: "party.jpg", center: 1/3, ratio: 16/9},
+    {name: "rainy-bbq.jpg", center: 1/3, ratio: 3/2},
+    {name: "sand.jpg", center: 1/2, ratio: 3/2},
+    {name: "seminar.jpg", center: 6/11, ratio: 3/2},
+    {name: "spongebob.jpg", center: 2/5, ratio: 3/2},
+    {name: "trivia.jpg", center: 3/7, ratio: 3/2}
+];
+
+// allows us to set the photo position at arbitrary times
+var currentPhoto; 
+
+/**
+    Function to set the photo to a given photo
+*/
+function setPhoto(photo) {
+    $(".photo").css("background-image", "url(/static/img/"+photo.name+")");
+    $(".footer-photo").css("background-image", "url(/static/img/"+photo.name+")");
+
+    setPhotoPosition(photo);
+
+    currentPhoto = photo;
+
 }
 
-function subtitleFade(scrollTop) {
-    var fadeLevel;
-    var height = parseInt($("#subtitle").css("padding-top")) / 2;
+setPhoto(photos[0]);
 
-    if (scrollTop <= 0 && $(".feature").css("display") != "none") {
-        // full header
-        fadeLevel = 1;
-    } else if (scrollTop >= height || $(".feature").css("display") == "none") {
-        // sticky navbar
-        fadeLevel = 0;
-    } else {
-        // in between
-        fadeLevel = -scrollTop/height + 1;
-    }
-    // console.log(scrollTop, height, fadeLevel);
-    $("#subtitle").css("color", "rgba(0,0,0,"+fadeLevel.toString()+")");
+/**
+    Function to pick a random photo, and switch to it
+*/
+function switchRandomPhoto() {
+    photo = photos[Math.floor(Math.random()*photos.length)];
+    setPhoto(photo);
 }
 
-// every time scrolling happens, call the two functions
-// but only check the scrolling position once
-function headerAnimate() {
+// switch at random every 30 seconds
+setInterval(switchRandomPhoto, 30000);
+
+
+/**
+    Function to control the photo parallax
+
+    It basically keeps the photo vertically "centered" in its viewport,
+    no matter the size of the viewport. "Centered" meaning aesthetic
+    center, which is given by the photo object.
+*/
+function setPhotoPosition(photo) {
     var scrollTop = $(document).scrollTop();
 
-    if ($(window).height() < $(document).height()) {
-        titleZoom(scrollTop);
-        stickyNav(scrollTop);
-        subtitleFade(scrollTop);
+    // vertical space of the photo
+    var photoSpace = (navPos + navBarHeight) - scrollTop;
+    if (navPos - scrollTop < 0) {
+        photoSpace = navBarHeight;
     }
-}
-
-function setPhotoOffset() {
-    var width = $(window).width();
-    // var photoHeight = 2 * width / 3;
-    var photoHeight = width * photoHeightModifier;
-    var scrollTop = $(document).scrollTop();
-
-    var offset;
-    if (scrollTop <= 0 && $(".feature").css("display") != "none") {
-        offset = (photoHeight / 2) - navPos/2;
-    } else if (scrollTop >= navPos || $(".feature").css("display") == "none") {
-        offset = (photoHeight / 2) - navBarHeight/2;
-    } else {
-        offset = (photoHeight / 2) - (-96/navPos * scrollTop + navPos/2);
+    if (scrollTop < 0) { // it's possible to scroll above the top
+        photoSpace = navPos + navBarHeight;
     }
-    
 
-    // console.log(offset);
+    // photo is 100% of page width, so width / ratio = height
+    var photoHeight = $(window).width() / photo.ratio;
+    var photoCenter = photoHeight * photo.center;
 
-    $(".photo").css({"background-position": "0 -"+offset.toString()+"px"});
+    // the point that should be at the top of the photo container
+    var photoTop = photoCenter - (photoSpace/2);
+
+    $(".photo").css("background-position", "0 -" + photoTop + "px");
+    // the zero is there because it goes left, top
+    // the minus is there because we want to move it up
 }
 
-function headerSetup() {
-    setPhoto(4);
-
-    var scrollTop = $(document).scrollTop();
-
-    titleZoom(scrollTop);
-    stickyNav(scrollTop);
-
-    setPhotoOffset();
-
-    // Sets the max-height of the hamburger menu
-    var height = $(window).height() - $("#navigation").height();
-
-    $(".ham-menu").css("max-height", height.toString()+"px");
+/**
+    Short function to set current photo position
+    Just so it's easy to give to the event handlers
+*/
+function setCurrentPhotoPos() {
+    setPhotoPosition(currentPhoto);
 }
 
-$(document).ready(headerSetup);
+$(document).scroll(setCurrentPhotoPos);
+$(window).resize(setCurrentPhotoPos);
+// see? easy!
 
-$(document).scroll(headerAnimate);
 
-$(window).resize(headerAnimate);
 
-$(window).resize(function() {
-    // Sets the max-height of the hamburger menu
-    var height = $(window).height() - $("#navigation").height();
 
-    $(".ham-menu").css("max-height", height.toString()+"px");
+/**
+TESTS
+*/
 
-});
-
-setInterval(function(){
-    setPhoto(-1);
-}, 30000);
+// todo lol
