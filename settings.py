@@ -209,7 +209,7 @@ NEVERCACHE_KEY = "f57f7b5c-bb1c-4302-bef5-26b6b3b43f2de9495caf-1f02-47ef-addb-48
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = "/app/theme/static/"
+STATIC_URL = "/static/"
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files

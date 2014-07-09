@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block titlecontent %}CSESoc Hoodie Preorder{% endblock %}
+{% block meta_title %}CSESoc Hoodie Preorder{% endblock %}
 
 {% block main %}{% spaceless %}
 
     <h1> CSESoc Hoodie Preorder</h1>
-    <a href="/app/theme/static/img/hoodie_sizing_chart.jpg"><img style="height:250px;" src="/app/theme/static/img/hoodie_sizing_chart.jpg"/></a>
+    <a href="/static/img/hoodie_sizing_chart.jpg"><img style="height:250px;" src="/static/img/hoodie_sizing_chart.jpg"/></a>
     <div class='application_form camp_form'>
         <form action="/merch/hoodies/" method="post">
         {% csrf_token %}

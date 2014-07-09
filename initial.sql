@@ -1064,7 +1064,7 @@ INSERT INTO "pages_richtextpage" VALUES(22,'<p>You can now pre-order the officia
 <p>Pre-order session ends <b>10th July 2014.</b></p>
 <p>You will be able to order a hoodie after the pre-order session, however we have limited quantity and cannot guarantee stock.</p>
 
-<a href="/app/theme/static/img/csesoc_sample_hoodie.png"><img src="/app/theme/static/img/csesoc_sample_hoodie.png"/></a>
+<a href="/static/img/csesoc_sample_hoodie.png"><img src="/static/img/csesoc_sample_hoodie.png"/></a>
 
 <p><b>Description:</b>
 <ul>

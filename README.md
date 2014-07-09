@@ -154,7 +154,7 @@ The first argument of render_to_response points to a template in app/theme/templ
 ```html
 {% extends 'base.html' %}
 
-{% block titlecontent %}Page Title{% endblock %}
+{% block meta_title %}Page Title{% endblock %}
 
 {% block main %}
 

@@ -186,8 +186,8 @@ var currentPhoto;
     Function to set the photo to a given photo
 */
 function setPhoto(photo) {
-    $(".photo").css("background-image", "url(/app/theme/static/img/"+photo.name+")");
-    $(".footer-photo").css("background-image", "url(/app/theme/static/img/"+photo.name+")");
+    $(".photo").css("background-image", "url(/static/img/"+photo.name+")");
+    $(".footer-photo").css("background-image", "url(/static/img/"+photo.name+")");
 
     setPhotoPosition(photo);
 
