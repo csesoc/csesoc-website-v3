@@ -64,9 +64,12 @@
         <div id='subtitle' class="medium-11">
             UNSW Computer Science and Engineering Society
         </div>
-        <div id='buttons' class="medium-1">
-            <a href="http://beta.csesoc.unsw.edu.au"><div>Beta</div></a>
-            <a href="http://compclub.com.au"><div>Comp Club</div></a>
+        <div class='welcome-user-item medium-1'>
+            {% if user.is_active %}
+            <span class="user-label" >Signed in as {{user.first_name}} {{user.last_name}}.</span> <span><a href='/zlogout'>Logout</a></span>
+            {% else %}
+            <span class="user-label">Not signed in.</span> <span><a href='/zlogin'>Login</a></span>
+            {% endif %}
         </div>
     </div>
 
@@ -116,13 +119,6 @@
     </div>
 </div>
 <div id="nav-padding">
-</div>
-<div class='welcome-user-item'>
-    {% if user.is_active %}
-    You're signed in as {{user.first_name}} {{user.last_name}}. (<a href='/zlogout'>logout</a>)
-    {% else %}
-    You are not signed in. (<a href='/zlogin'>login</a>)
-    {% endif %}
 </div>
 
 {% block categories_large %}
