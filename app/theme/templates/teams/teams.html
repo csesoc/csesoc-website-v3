@@ -5,9 +5,6 @@
 {% block extra_head %}
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
-
     <script>
         String.prototype.capitalize = function() {
             return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
@@ -27,8 +24,8 @@
                 }
 
                 $.ajax({
-                    url: 'http://cgi.cse.unsw.edu.au/~csesoc/updateMailingLists',
-                    data: { action: action, team: team, cseid: {{user.profile.cselogin}} },
+                    url: 'https://cgi.cse.unsw.edu.au/~csesoc/updateMailingLists',
+                    data: { action: action, team: team, cseid: '{{user.username}}' },
                     dataType: 'jsonp',
 
                     success: function(response){
@@ -78,7 +75,6 @@
     <div id='content'>
         <div class='news-card'>
             <h1>Teams</h1>
-            <h2>You are {{user.profile.cselogin}}</h2>
             {% for team in teams %}
                 {% comment %}
                     team.0 is team name

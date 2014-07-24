@@ -12,8 +12,8 @@
 
     <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
 
     {% ifinstalled mezzanine.blog %}
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
@@ -115,7 +115,15 @@
         </div>
     </div>
 </div>
-<div id="nav-padding"></div>
+<div id="nav-padding">
+</div>
+<div class='welcome-user-item'>
+    {% if user.is_active %}
+    You're signed in as {{user.first_name}} {{user.last_name}}. (<a href='/zlogout'>logout</a>)
+    {% else %}
+    You are not signed in. (<a href='/zlogin'>login</a>)
+    {% endif %}
+</div>
 
 {% block categories_large %}
 {% endblock %}

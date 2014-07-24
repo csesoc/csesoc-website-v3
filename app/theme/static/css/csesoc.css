@@ -224,6 +224,12 @@ ul.dropdown ul li a {
     color: #222222;
 }
 
+div.welcome-user-item {
+    position: fixed;
+    right: 30px;
+    top: 335px;
+}
+
 #nav-wrapper {
     float: left;
 }
@@ -738,7 +744,7 @@ tr {
 }
 
 .team > .team-button {
-    position: absolute;
+    position: relative;
     display: inline-block;
     width: 149px;
     margin-top: 15px;
