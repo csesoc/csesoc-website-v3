@@ -124,7 +124,6 @@
 {% endblock %}
 
 <div id="content">
-    {% if page.html_id %}
     <div class="row">
         <div class="container medium-12">
             {% nevercache %}
@@ -142,7 +141,6 @@
             {% endnevercache %}
         </div>
     </div>
-    {% endif %}
     <div class="row">
         <div class="medium-12 columns">
             {% block categories_small %}
