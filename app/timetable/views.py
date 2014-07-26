@@ -28,7 +28,7 @@ def show(request):
         result = timetable_importer.export(s, code, this_url)
         if result == None:
           messages.success(request, 'Success! Check <a href="http://calendar.google.com">Google Calendar</a>')
-          return render_to_response('tools/timetable-importer.html', context_instance=RequestContext(request))
+          return render_to_response('timetable-importer/timetable-importer.html', context_instance=RequestContext(request))
       elif f == 'use-login' and zu and zp:
         # scrape myUNSW for available semesters
         (result, c) = timetable_importer.getSemester(zu, zp)
@@ -36,7 +36,7 @@ def show(request):
           context = dict(c.items() + context.items())
           context['zu'] = zu
           context['zp'] = zp
-          return render_to_response('tools/timetable-importer-select-term.html',
+          return render_to_response('timetable-importer/timetable-importer-select-term.html',
                                     context,
                                     context_instance=RequestContext(request))
       elif zu and zp and semester:
@@ -44,14 +44,14 @@ def show(request):
         result = timetable_importer.exportByScraping(zu, zp, semester, code, this_url)
         if result == None:
           messages.success(request, 'Success! Check <a href="http://calendar.google.com">Google Calendar</a>')
-          return render_to_response('tools/timetable-importer.html', context_instance=RequestContext(request))
+          return render_to_response('timetable-importer/timetable-importer.html', context_instance=RequestContext(request))
       messages.error(request, result)
-      return render_to_response('tools/timetable-importer.html',
+      return render_to_response('timetable-importer/timetable-importer.html',
                                 context,
                                 context_instance=RequestContext(request))
     else:
       # get importer start page
-      return render_to_response('tools/timetable-importer.html',
+      return render_to_response('timetable-importer/timetable-importer.html',
                                 context,
                                 context_instance=RequestContext(request))
   # get google auth page
