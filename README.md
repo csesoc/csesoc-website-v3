@@ -3,7 +3,7 @@ csesoc-website-v2
 ## Developer setup for Ubuntu
 ###Core packages
 ```bash
-$ sudo apt-get install git pip sqlite3 python-ldap libsasl2-dev libldap2-dev python-dev libssl-dev
+$ sudo apt-get install git python-pip sqlite3 python-ldap libsasl2-dev libldap2-dev python-dev libssl-dev
 ```
 
 ###Setting up virtualenv
