@@ -195,10 +195,6 @@ ul.dropdown li {
     border-right: solid 1px white;
 }
 
-ul.dropdown li:first-child {
-    border-left: solid 1px white;
-}
-
 ul.dropdown li a {
     display: block;
 }
