@@ -12,8 +12,8 @@
 
     <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
 
-    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
 
     {% ifinstalled mezzanine.blog %}
     <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
@@ -59,7 +59,7 @@
     <div style="position: relative;" class="show-for-medium-up">
         <a href="/"><div class="title-link"></div></a>
     </div>
-
+    
     <div class='feature photo show-for-medium-up row'>
         <div id='subtitle' class="medium-11">
             UNSW Computer Science and Engineering Society
@@ -79,9 +79,9 @@
         </div>
     </a>
 
-    <div id="navbar">
-    <div id="scroller-anchor"></div>
-    <div class="scroller photo">
+    <div id="navbar"> 
+    <div id="scroller-anchor"></div> 
+    <div class="scroller photo"> 
         <div id="navigation">
             <div class="nav-large hide-for-small-only">
                 <div id="nav-wrapper">
@@ -118,32 +118,31 @@
         </div>
     </div>
 </div>
-<div id="nav-padding">
-</div>
+<div id="nav-padding"></div>
 
 {% block categories_large %}
 {% endblock %}
 
 <div id="content">
-    {% if messages %}
     <div class="row">
         <div class="container medium-12">
             {% nevercache %}
+            {% if messages %}
                 <div class="messages">
                 {% for message in messages %}
-                <div class="alert-box {{ message.tags }}" data-alert>
+                <div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     {{ message }}
-                    <a href="#" class="close">&times;</a>
                 </div>
                 {% endfor %}
                 </div>
+            {% endif %}
                 <div id="alerts"></div>
             {% endnevercache %}
         </div>
     </div>
-    {% endif %}
     <div class="row">
-        <div class="medium-9 columns">
+        <div class="medium-12 columns">
             {% block categories_small %}
             {% endblock %}
             {% if page.html_id %}
@@ -155,17 +154,12 @@
             </div>
             {% endif %}
         </div>
-        <div class="medium-3 columns card">
-            <h4>Sponsors</h4>
-            {% load sponsor_tags %}
-            {% list_sponsors %}
-        </div>
     </div>
 </div>
 <div class="push"></div>
 </div>
     <!-- FOOTER -->
-    <div class='footer-photo footer'>
+     <div class='footer-photo footer'>
         <div id='footer'>
             <span>
                 &copy; Copyright {% now "Y" %} CSESoc

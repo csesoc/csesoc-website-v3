@@ -131,9 +131,9 @@
             {% nevercache %}
                 <div class="messages">
                 {% for message in messages %}
-                <div class="alert-box {{ message.tags }}" data-alert>
+                <div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     {{ message }}
-                    <a href="#" class="close">&times;</a>
                 </div>
                 {% endfor %}
                 </div>
