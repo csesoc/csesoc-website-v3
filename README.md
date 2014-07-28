@@ -27,7 +27,6 @@ $ pip install -r requirements.txt
 The database for the website is stored in soc-website.db so we only need to run syncdb
 ```bash
 $ sqlite3 soc-website.db < initial.sql
-$ python manage.py syncdb
 ```
 
 ### Local settings
