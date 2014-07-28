@@ -827,6 +827,10 @@ margin: 0 auto -4em;
 height: 4em;
 }
 
+.category-text {
+    color: white;
+}
+
 /*.sticky {  
     position: absolute;  
     width: 100%;  
