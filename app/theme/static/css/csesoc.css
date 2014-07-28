@@ -489,6 +489,17 @@ ul.dropdown ul li a {
 
 /* Content */
 
+h3.post-subset {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 400;
+    font-size: 1.33rem;
+}
+
+h3.post-subset em {
+    font-weight: 300;
+    font-style: italic;
+}
+
 #content {
     max-width: 64rem;
     margin-left: auto;

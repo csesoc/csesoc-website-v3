@@ -87,20 +87,20 @@
 
 {% if tag or category or year or month or author %}
     {% block blog_post_list_filterinfo %}
-    <p>
+    <h3 class="post-subset">
     {% if tag %}
-        {% trans "Viewing posts tagged" %} {{ tag }}
+        {% trans "Posts with tag:" %} {{ tag }}
     {% else %}{% if category %}
-        {% trans "Viewing posts for the category" %} {{ category }}
+        {% trans "Posts from:" %} <em>{{ category }}</em>
     {% else %}{% if year or month %}
-        {% trans "Viewing posts from" %} {% if month %}{{ month }}, {% endif %}
-        {{ year }}
+        {% trans "Posts from:" %} <em>{% if month %}{{ month }}, {% endif %}
+        {{ year }}</em>
     {% else %}{% if author %}
-        {% trans "Viewing posts by" %}
-        {{ author.get_full_name|default:author.username }}
+        {% trans "Posts by:" %}
+        <em>{{ author.get_full_name|default:author.username }}</em>
     {% endif %}{% endif %}{% endif %}{% endif %}
     {% endblock %}
-    </p>
+    </h3>
 {% else %}
 <!--     {% if page %}
     {% block blog_post_list_pagecontent %}
