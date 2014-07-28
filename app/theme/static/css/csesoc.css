@@ -835,6 +835,9 @@ height: 4em;
     color: white;
 }
 
+.category-text:hover {
+    color: #D1D1D1;
+}
 /*.sticky {  
     position: absolute;  
     width: 100%;  
