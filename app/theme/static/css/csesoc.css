@@ -639,6 +639,7 @@ strong, b {
 }
 
 .category {
+    display: block;
     padding: 0.25rem;
     padding-right: 0.5rem;
     margin-top: 0.25rem;
