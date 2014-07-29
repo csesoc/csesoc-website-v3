@@ -129,6 +129,13 @@ $(document).scroll(stickyNav);
 $(document).ready(stickyNav);
 
 
+function menuHeight() {
+    var height = $(document).height() - navBarHeight;
+    $("#hamburger ul.ham-menu").css("height", height + "px");
+}
+
+$(window).resize(menuHeight);
+$(document).ready(menuHeight);
 
 
 /**
