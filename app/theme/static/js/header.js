@@ -129,6 +129,21 @@ $(document).scroll(stickyNav);
 $(document).ready(stickyNav);
 
 
+function menuHeight() {
+    var hamMenu = $("#hamburger ul.ham-menu");
+    hamMenu.css("height", "auto");
+    var height = $(window).height() - navBarHeight;
+    console.log(hamMenu.height(), height);
+    if (hamMenu.height() > height) {
+        hamMenu.css("height", height + "px");
+    }
+}
+
+$(window).resize(menuHeight);
+$(document).ready(menuHeight);
+$("#hamburger ul.ham-menu li").click(function() {
+    setTimeout(menuHeight, 750);
+});
 
 
 /**

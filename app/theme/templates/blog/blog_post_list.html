@@ -35,29 +35,29 @@
         {% endif %}
         {% endwith %} -->
         <a href="/blog/category/news/"> 
-            <div class="category News-link" >
+            <span class="category News-link" >
                 <span class="category-text">News</span>
-            </div>
+            </span>
         </a>
         <a href="/blog/category/social/">
-            <div class="category Social-link">
+            <span class="category Social-link">
                 <span class="category-text">Social</span>
-            </div>
+            </span>
         </a>
         <a href="/blog/category/careers/">
-            <div class="category Careers-link">
+            <span class="category Careers-link">
                 <span class="category-text">Careers</span>
-            </div>
+            </span>
         </a>
         <a href="/blog/category/tech/">
-            <div class="category Tech-link">
+            <span class="category Tech-link">
                 <span class="category-text">Tech</span>
-            </div>
+            </span>
         </span>
         <a href="/blog/category/beta/">
-            <div class="category Beta-link">
+            <span class="category Beta-link">
                 <span class="category-text">Beta</span>
-            </div>
+            </span>
         </span>
     </div>
 </div>
@@ -74,11 +74,31 @@
         {% endfor %}
         {% endif %}
         {% endwith %} -->
-        <div class="category News-link" ><a href="/blog/category/news/" class="category-text">News</a></div>
-        <div class="category Social-link"><a href="/blog/category/social/" class="category-text">Social</a></div>
-        <div class="category Careers-link"><a href="/blog/category/careers/" class="category-text">Careers</a></div>
-        <div class="category Tech-link"> <a href="/blog/category/tech/" class="category-text">Tech</a></div>
-        <div class="category Beta-link"><a href="/blog/category/beta/" class="category-text">Beta</a></div>
+        <a href="/blog/category/news/"> 
+            <span class="category News-link" >
+                <span class="category-text">News</span>
+            </span>
+        </a>
+        <a href="/blog/category/social/">
+            <span class="category Social-link">
+                <span class="category-text">Social</span>
+            </span>
+        </a>
+        <a href="/blog/category/careers/">
+            <span class="category Careers-link">
+                <span class="category-text">Careers</span>
+            </span>
+        </a>
+        <a href="/blog/category/tech/">
+            <span class="category Tech-link">
+                <span class="category-text">Tech</span>
+            </span>
+        </span>
+        <a href="/blog/category/beta/">
+            <span class="category Beta-link">
+                <span class="category-text">Beta</span>
+            </span>
+        </span>
     </div>
 </div>
 {% endblock %}
@@ -87,20 +107,20 @@
 
 {% if tag or category or year or month or author %}
     {% block blog_post_list_filterinfo %}
-    <p>
+    <h3 class="post-subset">
     {% if tag %}
-        {% trans "Viewing posts tagged" %} {{ tag }}
+        {% trans "Posts with tag:" %} {{ tag }}
     {% else %}{% if category %}
-        {% trans "Viewing posts for the category" %} {{ category }}
+        {% trans "Posts from:" %} <em>{{ category }}</em>
     {% else %}{% if year or month %}
-        {% trans "Viewing posts from" %} {% if month %}{{ month }}, {% endif %}
-        {{ year }}
+        {% trans "Posts from:" %} <em>{% if month %}{{ month }}, {% endif %}
+        {{ year }}</em>
     {% else %}{% if author %}
-        {% trans "Viewing posts by" %}
-        {{ author.get_full_name|default:author.username }}
+        {% trans "Posts by:" %}
+        <em>{{ author.get_full_name|default:author.username }}</em>
     {% endif %}{% endif %}{% endif %}{% endif %}
     {% endblock %}
-    </p>
+    </h3>
 {% else %}
 <!--     {% if page %}
     {% block blog_post_list_pagecontent %}
