@@ -819,19 +819,26 @@ tr {
 
 /* sticky footer */
 * {
-margin: 0;
+    margin: 0;
 }
-html, body {
-height: 100%;
+
+html {
+    height: 100%;
 }
+
+body {
+    min-height: 100%;
+}
+
 .wrapper {
-min-height: 100%;
-height: auto !important;
-height: 100%;
-margin: 0 auto -4em;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
 }
+
 .footer, .push {
-height: 4em;
+    height: 4em;
 }
 
 .category-text {
