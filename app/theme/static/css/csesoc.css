@@ -834,6 +834,10 @@ height: 4em;
     color: white;
 }
 
+.alert-box a {
+    color: white;
+}
+
 /*.sticky {  
     position: absolute;  
     width: 100%;  
