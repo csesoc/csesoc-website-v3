@@ -839,7 +839,7 @@ height: 4em;
 }
 
 .alert-box a {
-    color: white;
+    color: white !important;
 }
 
 /*.sticky {  
