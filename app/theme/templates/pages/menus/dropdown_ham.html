@@ -4,16 +4,6 @@
     
     {% if branch_level == 0 %}
     <ul class="nav-dropdown ham-menu">
-            <li>
-                <a href="http://beta.csesoc.unsw.edu.au" class="menu-link">
-                    <span class="menu-item">Beta</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://compclub.com.au" class="menu-link">
-                    <span class="menu-item">Comp Club</span>
-                </a>
-            </li>
             {% for page in page_branch %}
             {% if not has_home and page.is_primary and forloop.first and 0 %}
             <li class="ham-small-only">

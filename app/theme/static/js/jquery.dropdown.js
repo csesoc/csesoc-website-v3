@@ -17,14 +17,11 @@ $(function(){
     $("#hamburger").click(function(event) {
 		event.stopPropagation();
 
-		console.log(!$("#hamburger ul, #hamburger ul *").is(event.target));
-		console.log($("#hamburger ul").css("visibility"));
-
-		if (!$("#hamburger ul, #hamburger ul *").is(event.target) &&
+        if (!$("#hamburger ul, #hamburger ul *").is(event.target) &&
 				$("#hamburger ul").css("visibility") == "visible") {
 			
 			$("#hamburger ul").css("visibility", "hidden");
-    	} else {
+        } else {
 			$("#hamburger ul").css("visibility", "visible");
     	}
     });
