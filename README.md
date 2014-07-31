@@ -3,13 +3,12 @@ csesoc-website-v2
 ## Developer setup for Ubuntu
 ###Core packages
 ```bash
-$ sudo apt-get install git python-pip sqlite3 python-ldap libsasl2-dev libldap2-dev python-dev libssl-dev
+$ sudo apt-get install git python-virtualenv python-pip sqlite3 python-ldap libsasl2-dev libldap2-dev python-dev libssl-dev
 ```
 
 ###Setting up virtualenv
 This is only necessay if you work on a lot of Python projects. It's mainly to deal with package dependencies. It's not completely necessary, but its a good habit.
 ```bash
-$ sudo apt-get install virtualenv
 $ virtualenv <environment_name>
 $ . <environment_name>/bin/activate
 ```
