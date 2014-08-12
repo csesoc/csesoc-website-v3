@@ -1076,7 +1076,7 @@ INSERT INTO "pages_richtextpage" VALUES(22,'<p>You can now pre-order the officia
 </ul></p>
 
 <p><b>Payment options:</b>
-<p><i>Preferred method is PayPal. There are no fees and you don''t need an account - you can use your credit/debit card.</i>
+<p><i>Preferred method is PayPal. You can use your credit/debit card.</i>
 <ul>
     <li>Paypal (Fill out the online form and you''ll be given a link for payment)</li>
     <li>Cash (Email<a href="mailto:csesoc@cse.unsw.edu.au" target="_top"> csesoc@cse.unsw.edu.au</a> and pay when you pick up your hoodie)</li>
