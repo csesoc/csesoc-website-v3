@@ -12,7 +12,7 @@ $(document).ready(function(){
         desired_quantity = $('#desired_quantity').val();
         max_quantity = {{ max_quantity }};
         price = {{ price }};
-        paypal_surcharge = (({{ paypal_surcharge }} / 100) + 1);
+        paypal_surcharge = ({{ paypal_surcharge }});
         if (desired_quantity > max_quantity){
             $('#desired_quantity_group').addClass('error');
             desired_quantity = max_quantity;
@@ -21,7 +21,7 @@ $(document).ready(function(){
             $('#desired_quantity_group').removeClass('error');
         }
         $('#cash-price').text('$' + (price * desired_quantity).toFixed(2));
-        $('#paypal-price').text('$' +(price * paypal_surcharge * desired_quantity).toFixed(2));
+        $('#paypal-price').text('About $' +((desired_quantity * price)/(1 - paypal_surcharge).toFixed(2));
         $('#id_quantity').val(desired_quantity);
     });
 });
