@@ -84,7 +84,7 @@ function togglepaypal(){
                     <span style='color:red;'><em>Please ensure your CSE username or UNSW Student Number (<strong>{{user.username}}</strong>) is present in the payment description.</em></span>
                 </td></tr>
             {% endif %}
-            <tr><td><h3><a href='javascript:togglepaypal();'>Paypal or Credit Card</a></h3></td><td><h3 id="paypal-price"> About {{paypal_price }}</h3></td></tr>
+            <tr><td><h3><a href='javascript:togglepaypal();'>Paypal or Credit Card</a></h3></td><td><h3 id="paypal-price"> {{paypal_price }}</h3></td></tr>
             <tr class='paypal'><td colspan="2">
                 <em>Note: Paying by credit card or PayPal incurs a {{ paypal_display_percentage }}% fee, as shown above.</em>
                 <br/>
