@@ -21,7 +21,13 @@ $(document).ready(function(){
             $('#desired_quantity_group').removeClass('error');
         }
         $('#cash-price').text('$' + (price * desired_quantity).toFixed(2));
-        $('#paypal-price').text('About $' +(((desired_quantity * price)/(1 - paypal_surcharge)) + 1).toFixed(2));
+        
+        
+        $('#paypal-price').text('$' +((desired_quantity * price)/(1-paypal_surcharge)+0.3*desired_quantity).toFixed(2));
+        
+      
+        
+        
         $('#id_quantity').val(desired_quantity);
     });
 });
