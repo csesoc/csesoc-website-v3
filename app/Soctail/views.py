@@ -17,7 +17,7 @@ def soctail(request):
       form = SoctailForm(request.POST)
       if form.is_valid():
           form.save()
-          if form.cleaned_data['num_ticket'] == '2':
+          if form.cleaned_data['num_tickets'] == '2':
             return redirect("https://www.csesoc.unsw.edu.au/finance/20140021/c29342e426c66b2c7cf11dcd516e67b0")
           else:
             return redirect("https://www.csesoc.unsw.edu.au/finance/20140020/7ca1a7add0936cdd17f4d97791688553")
