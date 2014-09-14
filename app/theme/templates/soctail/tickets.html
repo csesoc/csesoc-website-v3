@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block meta_title %}CSESoc Soctail 2014 Ticktets {% endblock %}
+
+{% block main %}{% spaceless %}
+
+    <h1> CSESoc Hoodie Preorder</h1>
+    <div class='application_form camp_form'>
+        <form action="/soctail/tickets/" method="post">
+        {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <div class='submit_button'>
+                <input class="button class btn btn-large" type="submit" value="Purchase!" />
+            </div>
+        </form>
+    </div>
+
+    <p>If you require any assistant , please email csesoc@cse.unsw.edu.au. Your tickets will be emailed to you via email once your order is processed.</p>
+
+{% endspaceless %}{% endblock %}
+
