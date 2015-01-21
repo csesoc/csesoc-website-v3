@@ -716,6 +716,10 @@ td.image {
     width: 10rem;
 }
 
+td.image a img {
+    width: 10rem;
+}
+
 tr {
     line-height: 2;
 }
