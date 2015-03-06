@@ -137,7 +137,7 @@
                 <div class="messages">
                 {% for message in messages %}
                 <div class="alert-box {{ message.tags }}" data-alert>
-                    {{ message }}
+                    {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
                     <a href="#" class="close">&times;</a>
                 </div>
                 {% endfor %}

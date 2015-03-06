@@ -27,7 +27,7 @@ def show(request):
         # source exists, parse it now.
         result = timetable_importer.export(s, code, this_url)
         if result == None:
-          messages.success(request, 'Success! Check <a href="http://calendar.google.com">Google Calendar</a>')
+          messages.success(request, 'Success! Check out your updated <a style="font-weight:bold;" href="http://calendar.google.com">Google Calendar</a>', extra_tags='safe')
           return render_to_response('timetable-importer/timetable-importer.html', context_instance=RequestContext(request))
       elif f == 'use-login' and zu and zp:
         # scrape myUNSW for available semesters
@@ -43,7 +43,7 @@ def show(request):
         # create calendar by scraping myUNSW
         result = timetable_importer.exportByScraping(zu, zp, semester, code, this_url)
         if result == None:
-          messages.success(request, 'Success! Check <a href="http://calendar.google.com">Google Calendar</a>')
+          messages.success(request, 'Success! Check out your updated <a style="font-weight:bold;" href="http://calendar.google.com">Google Calendar</a>', extra_tags='safe')
           return render_to_response('timetable-importer/timetable-importer.html', context_instance=RequestContext(request))
       messages.error(request, result)
       return render_to_response('timetable-importer/timetable-importer.html',
