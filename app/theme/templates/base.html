@@ -42,6 +42,7 @@
         <script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
         <script src='{% static 'js/vendor/custom.modernizr.js' %}'></script>
         <script src="{% static "js/modernizr.js" %}"></script>
+        <script src="{% static "js/team.js" %}"></script>
         {% block extra_js %}{% endblock %}
     {% endcompress %}
     {% include "includes/header_scripts.html" %}
@@ -51,6 +52,13 @@
     <![endif]-->
 
     {% block extra_head %}{% endblock %}
+
+    {% if user.is_active %}
+        <script>
+            current_user_id = '{{ user.username }}'
+        </script>
+    {% endif %}
+
 </head>
 
 <body id="{% block body_id %}body{% endblock %}">
