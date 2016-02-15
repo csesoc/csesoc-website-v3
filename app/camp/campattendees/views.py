@@ -35,6 +35,11 @@ class ApplicationForm(forms.ModelForm):
 
 def signup(request):
    if request.user.is_authenticated():
+      # redirect to the 'signups have closed' page if they haven't applied yet
+      student = Application.objects.filter(student_number=request.user.username)
+      if len(student) == 0:
+         return redirect('/first-year-camp/signup')
+
       this_year = datetime.date.today().year
       if request.method == 'POST': # form submitted
          student = Application.objects.filter(student_number=request.user.username)
@@ -44,18 +49,18 @@ def signup(request):
          else:
             student = student[0]
             if student.payment_status == "D":
-             deposit = True
+               deposit = True
          arc = False
          if 'arc' in request.POST:
              arc = True
          form = ApplicationForm(request.POST, request.FILES, instance=student) # form bound to POST data
          form.clean_file(request.FILES)
          early_bird = False
-         if str(datetime.date.today()) < "2014-03-08":
+         if datetime.datetime.now() < datetime.datetime(2015, 03, 05, 00, 00, 00):
              early_bird = True
          if form.is_valid():
             form.save()
-            return render_to_response('camp/thanks-signup.html', {'arc': arc, 'early_bird':  early_bird, 'deposit': deposit}, context_instance=RequestContext(request))
+            return render_to_response('camp/thanks-signup.html', {'arc': arc, 'early_bird': early_bird, 'deposit': deposit}, context_instance=RequestContext(request))
       else:
          student = Application.objects.filter(student_number=request.user.username)
          if len(student) == 0:

@@ -3,7 +3,8 @@
 
 {% block main %}
 <div class="card">
-    <h1>Our Sponsors</h1>
+    {% for title, sponsors in sponsor_levels %}
+    <h1>{{ title }}</h1>
     <table class="table table-bordered table-striped table-sponsors">
         <tbody>
             {% for sponsor in sponsors %}
@@ -21,6 +22,7 @@
             {% endfor %}
         </tbody>
     </table>
+    {% endfor %}
 </div>
 {% endblock %}
 

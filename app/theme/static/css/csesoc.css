@@ -872,3 +872,7 @@ body {
     z-index: 100;  
     border-top: 0;  
 } */
+
+.sponsorName {
+    font-weight: bold;
+}

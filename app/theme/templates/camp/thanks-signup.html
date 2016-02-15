@@ -1,46 +1,44 @@
 {% extends "base.html" %}
-{% block meta_title %}CSESoc First Year Camp 2014 - Thanks!{% endblock %}
+{% block meta_title %}CSESoc First Year Camp 2015 - Thanks!{% endblock %}
 {% block extraheadercontent %}
-    <meta http-equiv="refresh" content="5;{% url campattendees.views.signup %}" />
+    <meta http-equiv="refresh" content="5;{% url "app.camp.campattendees.views.signup" %}" />
 {% endblock %}
 {% block main %}
     <h1>Thanks!</h1>
     <p>Thanks for signing up, you'll hear from us soon!</p>
-    <p>If you think you've made a mistake in your application, feel free to edit it any time</p>
-    <p>Don't forget to suggest songs for the dance party of Saturday night. You can do so by going to:</p>
-    <p><a href="http://forte.csesoc.com.au/playlists/pcypd6Tv">forte.csesoc.com.au/playlists/pcypd6Tv</a></p>
+    <p>If you think you've made a mistake in your application, feel free to edit it at any time.</p>
     <p>Meanwhile, don't forget to pay your deposit if you want to secure your spot! Deposits can be made in person (cash only) at a CSESoc BBQ or to a CSESoc Executive in the Socs Office (K17 Room 306).</p>
     <p>Alternatively, you may pay the full amount by DD or Paypal.</p>
     <h3>
     {% if arc %}
         {% if early_bird %}
             {% if deposit %}
-                <a href="https://www.csesoc.unsw.edu.au/finance/20129007/1d3b3601b9218c01dd0f5786f6feb01a">Click here</a>
+                <a href="https://www.csesoc.unsw.edu.au/finance/20150006/4fc49a76bb6a3b745e61271e36fc19e7">Click here</a>
             {% else %}
-                <a href="https://www.csesoc.unsw.edu.au/finance/20129001/1612e833f98104d722b19bae9cd89774">Click here</a>
+                <a href="https://www.csesoc.unsw.edu.au/finance/20150001/a506a1df7e4d86471de3dd26316e501a">Click here</a>
             {% endif %}
         {% else %}
             {% if deposit %}
-                <a href="https://www.csesoc.unsw.edu.au/finance/20129008/78e7558dd1c392e2a4ad71a0f0c71b5f">Click here</a>
+                <a href="https://www.csesoc.unsw.edu.au/finance/20150008/5c8aa71d402d522e188b97869135f1e3">Click here</a>
             {% else %}
-                <a href="https://www.csesoc.unsw.edu.au/finance/20129002/3c79019987d4acf1482950c5c185fb4d">Click here</a>
+                <a href="https://www.csesoc.unsw.edu.au/finance/20150004/12611c561c3672191fec061c59cec07a">Click here</a>
             {% endif %}
         {% endif %}
     {% else %}
         {% if early_bird %}
             {% if deposit %}
-                <a href="https://www.csesoc.unsw.edu.au/finance/20129005/091e91f07073d5fab243453e79dd89bd">Click here</a>
+                <a href="https://www.csesoc.unsw.edu.au/finance/20150007/f7b2cb4e040b5fe932e2c4a9948d545d">Click here</a>
             {% else %}
-                <a href="https://www.csesoc.unsw.edu.au/finance/20129003/684a9f4cf8a4464329cc9d5ad4ec580b">Click here</a>
+                <a href="https://www.csesoc.unsw.edu.au/finance/20150003/b3a0de72eb99faf4c37f1e87dcf49ca8">Click here</a>
             {% endif %}
         {% else %}
             {% if deposit %}
-                <a href="https://www.csesoc.unsw.edu.au/finance/20129006/c2f06792c1f00e2d00ef8ee6346d2c54">Click here</a>
+                <a href="https://www.csesoc.unsw.edu.au/finance/20150009/162c0e0eea542ad859feae84c241ca71">Click here</a>
             {% else %}
-                <a href="https://www.csesoc.unsw.edu.au/finance/20129004/aa32dd266d056e9321fe6d2d0f2d2006">Click here</a>
+                <a href="https://www.csesoc.unsw.edu.au/finance/20150005/fc2bc8c6ec2bd48a372ee96bb03b19d1">Click here</a>
             {% endif %}
         {% endif %}
     {% endif %}
     for payment invoice details.</h3>
-    <p><a href="{% url campattendees.views.signup %}">Return to form</a></p>
+    <p><a href="{% url "app.camp.campattendees.views.signup" %}">Return to form</a></p>
 {% endblock %}

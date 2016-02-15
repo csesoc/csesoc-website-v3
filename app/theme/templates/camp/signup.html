@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 
-{% block meta_title %}CSESoc First Year Camp 2014 - Application Form{% endblock %}
+{% block meta_title %}CSESoc First Year Camp 2015 - Application Form{% endblock %}
 
 {% block main %}{% spaceless %}
 {% block extra_js %}
-<script type='text/javascript' src='/assets/js/jquery.min.js'></script>
 
 <style>
     th {vertical-align:middle;}
@@ -15,9 +14,13 @@
         $("#id_gender").change(loadShirtSize).each(loadShirtSize);
         $("#id_student_number").attr("readonly", "readonly");
         $('#id_age').each(function() {
-            widget = $("<input type='date' />").attr({ name: this.name, value: this.value})
+            widget = $("<input type='date' />").attr({ name: this.name, value: this.value});
             widget.insertBefore(this);
         }).remove();
+
+        if ($('[type="date"]').prop('type') != 'date') {
+            $('[type="date"]').datepicker();
+        }
     });
     function loadShirtSize() {
         options = "";
@@ -47,7 +50,6 @@
   }
 </script>
 {% endblock %}
-As this is a camp, we will need a medical form from you. Please fill out <b><a href="/media/medform.pdf">this form</a></b> and then upload it below.
 
 <div class='application_form camp_form'>
     <form action="/camp/signup/" enctype="multipart/form-data" method="post">

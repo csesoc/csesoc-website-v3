@@ -1,7 +1,6 @@
 from django.db import models
 from app.camp import campglobals
 
-
 class Application(models.Model):
    full_name = models.CharField(max_length=100)
    student_number = models.CharField(max_length=8)
@@ -15,7 +14,7 @@ class Application(models.Model):
    medical = models.TextField(help_text='Please list any medical conditions that should be disclosed above.', blank=True)
 
    payment_status = models.CharField(max_length=1, choices=campglobals.PAYMENT_CHOICES, default='N')
-   medical_pdf = models.FileField(upload_to="storage/uploads", blank=True)
+   medical_pdf = models.FileField(upload_to="storage/uploads", blank=True, editable=False)
    year = models.IntegerField(verbose_name='Application Year', editable=True)
    shirt_size = models.CharField(max_length=3, choices=campglobals.SHIRT_CHOICES, default='N')
 
