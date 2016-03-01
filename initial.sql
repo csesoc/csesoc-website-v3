@@ -1349,6 +1349,7 @@ CREATE TABLE "django_comment_flags" (
 );
 CREATE TABLE "sponsors_sponsor" (
     "id" integer NOT NULL PRIMARY KEY,
+    "level" varchar(200) NOT NULL,
     "name" varchar(200) NOT NULL,
     "description" text NOT NULL,
     "website" varchar(200) NOT NULL,
