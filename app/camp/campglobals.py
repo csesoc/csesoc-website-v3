@@ -18,6 +18,7 @@ GENDER_CHOICES = (
       
 
 PAYMENT_CHOICES = (
+      ('D', 'Deleted'),
       ('N', 'Not Paid'),
       ('AE', 'Paid Arc Earlybird'),
       ('NE', 'Paid Non-Arc Earlybird'),
@@ -26,7 +27,7 @@ PAYMENT_CHOICES = (
       )
 
 SHIRT_CHOICES = (
-    ('XS', 'Unisex - Extra Small'
+    ('XS', 'Unisex - Extra Small'),
     ('S', 'Unisex - Small'),
     ('M', 'Unisex - Medium'),
     ('L', 'Unisex - Large'),
@@ -44,6 +45,10 @@ SHIRT_CHOICES = (
 def make_accepted(modeladmin, request, queryset):
   queryset.update(accepted=True)
 make_accepted.short_description = "Accept Leaders"
+
+def mark_deleted(modeladmin, request, queryset):
+   queryset.update(payment_status='D')
+mark_deleted.short_description = "Deleted - Won't pay"
 
 def mark_arcEarlyPaid(modeladmin, request, queryset):
    queryset.update(payment_status='AE')

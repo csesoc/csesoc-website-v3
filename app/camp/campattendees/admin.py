@@ -5,6 +5,6 @@ from app.camp import campglobals
 class ApplicationAdmin(admin.ModelAdmin):
   list_filter = ('year','shirt_size','gender', 'payment_status')
   list_display = ('full_name', 'gender', 'age', 'cse_program','shirt_size','payment_status','year', 'medical_pdf')
-  actions = [campglobals.mark_arcEarlyPaid, campglobals.mark_nonarcEarlyPaid, campglobals.mark_arcRegPaid, campglobals.mark_nonarcRegPaid, campglobals.mark_medicalyes]
+  actions = [campglobals.mark_deleted, campglobals.mark_arcEarlyPaid, campglobals.mark_nonarcEarlyPaid, campglobals.mark_arcRegPaid, campglobals.mark_nonarcRegPaid, campglobals.mark_medicalyes]
 
 admin.site.register(Application, ApplicationAdmin)

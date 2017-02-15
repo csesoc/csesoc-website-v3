@@ -37,8 +37,8 @@ def signup(request):
    if request.user.is_authenticated():
       # redirect to the 'signups have closed' page if they haven't applied yet
       student = Application.objects.filter(student_number=request.user.username)
-      if len(student) == 0:
-         return redirect('/first-year-camp/signup')
+      #if len(student) == 0:
+      #   return redirect('/first-year-camp/signup')
 
       this_year = datetime.date.today().year
       if request.method == 'POST': # form submitted
