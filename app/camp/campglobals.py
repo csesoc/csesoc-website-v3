@@ -25,11 +25,12 @@ PAYMENT_CHOICES = (
       )
 
 SHIRT_CHOICES = (
-    ('S', 'Mens - Small'),
-    ('M', 'Mens - Medium'),
-    ('L', 'Mens - Large'),
-    ('XL', 'Mens - Extra Large'),
-    ('XXL', 'Mens - XXL'),
+    ('XS', 'Unisex - Extra Small'
+    ('S', 'Unisex - Small'),
+    ('M', 'Unisex - Medium'),
+    ('L', 'Unisex - Large'),
+    ('XL', 'Unisex - Extra Large'),
+    ('XXL', 'Unisex - Extra Extra Large'),
     ('6', 'Ladies - 6'),
     ('8', 'Ladies - 8'),
     ('10', 'Ladies - 10'),

@@ -43,24 +43,21 @@ def signup(request):
       this_year = datetime.date.today().year
       if request.method == 'POST': # form submitted
          student = Application.objects.filter(student_number=request.user.username)
-         deposit = False
          if len(student) == 0:
             student = Application(year=this_year)
          else:
             student = student[0]
-            if student.payment_status == "D":
-               deposit = True
          arc = False
          if 'arc' in request.POST:
              arc = True
          form = ApplicationForm(request.POST, request.FILES, instance=student) # form bound to POST data
          form.clean_file(request.FILES)
          early_bird = False
-         if datetime.datetime.now() < datetime.datetime(2016, 02, 29, 00, 00, 00):
+         if datetime.datetime.now() < datetime.datetime(2017, 02, 27, 23, 59, 00):
              early_bird = True
          if form.is_valid():
             form.save()
-            return render_to_response('camp/thanks-signup.html', {'arc': arc, 'early_bird': early_bird, 'deposit': deposit}, context_instance=RequestContext(request))
+            return render_to_response('camp/thanks-signup.html', {'arc': arc, 'early_bird': early_bird}, context_instance=RequestContext(request))
       else:
          student = Application.objects.filter(student_number=request.user.username)
          if len(student) == 0:

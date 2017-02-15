@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block meta_title %}CSESoc First Year Camp 2016 - Application Form{% endblock %}
+{% block meta_title %}CSESoc First Year Camp 2017 - Application Form{% endblock %}
 
 {% block main %}{% spaceless %}
 {% block extra_js %}
@@ -23,30 +23,25 @@
         }
     });
     function loadShirtSize() {
+        // this function is not unnecessary
+        // TODO refactor code to no longer use this
         options = "";
-        update = true;
-        if($(this).val() == 'M') {
-          options += "<option value=\"S\">Small</option>";
-          options += "<option value=\"M\">Medium</option>";
-          options += "<option value=\"L\">Large</option>";
-          options += "<option value=\"XL\">Extra Large</option>";
-          options += "<option value=\"XXL\">XXL</option>";
-      } else if($(this).val() == 'F') {
-          options += "<option value=\"6\">6</option>";
-          options += "<option value=\"8\">8</option>";
-          options += "<option value=\"10\">10</option>";
-          options += "<option value=\"12\">12</option>";
-          options += "<option value=\"14\">14</option>";
-          options += "<option value=\"16\">16</option>";
-      } else {
-          update = false;
-      }
+        options += "<option value=\"XS\">Unisex - Extra Small</option>";
+        options += "<option value=\"S\">Unisex - Small</option>";
+        options += "<option value=\"M\">Unisex - Medium</option>";
+        options += "<option value=\"L\">Unisex - Large</option>";
+        options += "<option value=\"XL\">Unisex - Extra Large</option>";
+        options += "<option value=\"XXL\">Unisex - Extra Extra Large</option>";
+        options += "<option value=\"6\">Ladies - 6</option>";
+        options += "<option value=\"8\">Ladies - 8</option>";
+        options += "<option value=\"10\">Ladies - 10</option>";
+        options += "<option value=\"12\">Ladies - 12</option>";
+        options += "<option value=\"14\">Ladies - 14</option>";
+        options += "<option value=\"16\">Ladies - 16</option>";
 
-      if (update) {
-          selected = $("#id_shirt_size").val();
-          $("#id_shirt_size").html(options);
-          $("#id_shirt_size").val(selected);
-      }
+        selected = $("#id_shirt_size").val();
+        $("#id_shirt_size").html(options);
+        $("#id_shirt_size").val(selected);
   }
 </script>
 {% endblock %}
