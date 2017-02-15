@@ -19,17 +19,19 @@ GENDER_CHOICES = (
 
 PAYMENT_CHOICES = (
       ('N', 'Not Paid'),
-      ('D', 'Deposit Paid'),
-      ('A', 'Paid Arc Amount'),
-      ('F', 'Paid in Full'),
+      ('AE', 'Paid Arc Earlybird'),
+      ('NE', 'Paid Non-Arc Earlybird'),
+      ('AR', 'Paid Arc Regular'),
+      ('NR', 'Paid Non-Arc Regular'),
       )
 
 SHIRT_CHOICES = (
-    ('S', 'Mens - Small'),
-    ('M', 'Mens - Medium'),
-    ('L', 'Mens - Large'),
-    ('XL', 'Mens - Extra Large'),
-    ('XXL', 'Mens - XXL'),
+    ('XS', 'Unisex - Extra Small'
+    ('S', 'Unisex - Small'),
+    ('M', 'Unisex - Medium'),
+    ('L', 'Unisex - Large'),
+    ('XL', 'Unisex - Extra Large'),
+    ('XXL', 'Unisex - Extra Extra Large'),
     ('6', 'Ladies - 6'),
     ('8', 'Ladies - 8'),
     ('10', 'Ladies - 10'),
@@ -39,22 +41,25 @@ SHIRT_CHOICES = (
     )
 
 
-
 def make_accepted(modeladmin, request, queryset):
   queryset.update(accepted=True)
 make_accepted.short_description = "Accept Leaders"
 
-def mark_depositpaid(modeladmin, request, queryset):
-   queryset.update(payment_status='D')
-mark_depositpaid.short_description = "Deposit Paid"
+def mark_arcEarlyPaid(modeladmin, request, queryset):
+   queryset.update(payment_status='AE')
+mark_arcEarlyPaid.short_description = "Arc Earlybird Paid"
 
-def mark_fullpaid(modeladmin, request, queryset):
-   queryset.update(payment_status='F')
-mark_fullpaid.short_description = "Paid Full"
+def mark_nonarcEarlyPaid(modeladmin, request, queryset):
+   queryset.update(payment_status='NE')
+mark_nonarcEarlyPaid.short_description = "Non-Arc Earlybird Paid"
 
-def mark_arcpaid(modeladmin, request, queryset):
-   queryset.update(payment_status='A')
-mark_arcpaid.short_description = "Arc Paid"
+def mark_arcRegPaid(modeladmin, request, queryset):
+   queryset.update(payment_status='AR')
+mark_arcRegPaid.short_description = "Arc Regular Paid"
+
+def mark_nonarcRegPaid(modeladmin, request, queryset):
+   queryset.update(payment_status='NR')
+mark_nonarcRegPaid.short_description = "Non-Arc Regular Paid"
 
 def mark_medicalyes(modeladmin, request, queryset):
    queryset.update(medical_form=True)
