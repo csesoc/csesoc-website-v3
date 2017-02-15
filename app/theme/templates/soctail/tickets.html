@@ -4,12 +4,12 @@
 
 {% block main %}{% spaceless %}
 
-    <h1> CSESoc Hoodie Preorder</h1>
+<h1> CSESoc Hoodie Preorder</h1>
     <div class='application_form camp_form'>
         <form action="/soctail/tickets/" method="post">
-        {% csrf_token %}
+        {#% csrf_token %#}
             <table>
-                {{ form.as_table }}
+                {#{ form.as_table }#}
             </table>
             <div class='submit_button'>
                 <input class="button class btn btn-large" type="submit" value="Purchase!" />

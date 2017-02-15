@@ -56,7 +56,7 @@ def signup(request):
          form = ApplicationForm(request.POST, request.FILES, instance=student) # form bound to POST data
          form.clean_file(request.FILES)
          early_bird = False
-         if datetime.datetime.now() < datetime.datetime(2015, 03, 05, 00, 00, 00):
+         if datetime.datetime.now() < datetime.datetime(2016, 02, 29, 00, 00, 00):
              early_bird = True
          if form.is_valid():
             form.save()

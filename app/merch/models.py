@@ -1,8 +1,7 @@
 from django.db import models
 
 GENDER_CHOICES = (
-      ('M', 'Male'),
-      ('F', 'Female'),
+      ('U', 'Unisex'),
       )
     
 
@@ -17,7 +16,6 @@ SHIRT_CHOICES = (
     ('M', 'M'),
     ('L', 'L'),
     ('XL', 'XL'),
-    ('XXL', 'XXL'),
     )
 
 class Hoodie(models.Model):
