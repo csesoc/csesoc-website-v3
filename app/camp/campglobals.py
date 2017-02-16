@@ -20,10 +20,10 @@ GENDER_CHOICES = (
 PAYMENT_CHOICES = (
       ('D', 'Deleted'),
       ('N', 'Not Paid'),
-      ('AE', 'Paid Arc Earlybird'),
-      ('NE', 'Paid Non-Arc Earlybird'),
-      ('AR', 'Paid Arc Regular'),
-      ('NR', 'Paid Non-Arc Regular'),
+      ('E', 'Paid Arc Earlybird'),
+      ('P', 'Paid Non-Arc Earlybird'),
+      ('A', 'Paid Arc Regular'),
+      ('R', 'Paid Non-Arc Regular'),
       )
 
 SHIRT_CHOICES = (
@@ -51,19 +51,19 @@ def mark_deleted(modeladmin, request, queryset):
 mark_deleted.short_description = "Deleted - Won't pay"
 
 def mark_arcEarlyPaid(modeladmin, request, queryset):
-   queryset.update(payment_status='AE')
+   queryset.update(payment_status='E')
 mark_arcEarlyPaid.short_description = "Arc Earlybird Paid"
 
 def mark_nonarcEarlyPaid(modeladmin, request, queryset):
-   queryset.update(payment_status='NE')
+   queryset.update(payment_status='P')
 mark_nonarcEarlyPaid.short_description = "Non-Arc Earlybird Paid"
 
 def mark_arcRegPaid(modeladmin, request, queryset):
-   queryset.update(payment_status='AR')
+   queryset.update(payment_status='A')
 mark_arcRegPaid.short_description = "Arc Regular Paid"
 
 def mark_nonarcRegPaid(modeladmin, request, queryset):
-   queryset.update(payment_status='NR')
+   queryset.update(payment_status='R')
 mark_nonarcRegPaid.short_description = "Non-Arc Regular Paid"
 
 def mark_medicalyes(modeladmin, request, queryset):
