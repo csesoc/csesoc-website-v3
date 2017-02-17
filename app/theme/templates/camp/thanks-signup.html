@@ -1,14 +1,23 @@
 {% extends "base.html" %}
-{% block meta_title %}CSESoc First Year Camp 2015 - Thanks!{% endblock %}
+{% block meta_title %}CSESoc First Year Camp 2017 - Thanks!{% endblock %}
 {% block extraheadercontent %}
     <meta http-equiv="refresh" content="5;{% url "app.camp.campattendees.views.signup" %}" />
 {% endblock %}
 {% block main %}
-    <h1>Thanks!</h1>
-    <p>Thanks for signing up, you'll hear from us soon! Remember to check your Zmail regularly!</p>
+    <h1>You're almost there!</h1>
+    <p>Thanks for registering your details with us, you'll here back from us soon!</p>
     <p>If you think you've made a mistake in your application, feel free to edit it at any time.</p>
-    <p>Meanwhile, don't forget to pay for your ticket if you want to secure your spot! Payment can be made in person (cash only) at a CSESoc BBQ or to a CSESoc Executive in the Socs Office (K17 Room B03), or you can pay now through Direct Deposit or Paypal.</p>
-    <h3>
+    <p style="text-align: center;"><span style="text-decoration: underline; color: #ff0000 ;"><strong>Your spot is not yet secured</strong></span></p>
+    <p>In order to secure your&nbsp;position, you must send through your payment.&nbsp;<strong>Remember to check your UNSW zMail regularly. </strong>We will be using this address to contact you&nbsp;with information about camp.</p>
+    <p>If you think you've made a mistake in your application, feel free to edit it at any time.</p>
+    <h2>How Can I pay?</h2>
+    <ul>
+        <li>Paypal via the website</li>
+        <li>Cash in person at our O-Week stall</li>
+        <li>Cash in person, to an <a href="http://csesoc.unsw.edu.au/about/exec-and-heads">executive member</a> of CSESoc in K17 Basement (Room B03)</li>
+        <li>Bank Transfer</li>
+    </ul>
+    <h1>
     {% if arc %}
         {% if early_bird %}
             <a href="https://www.csesoc.unsw.edu.au/finance/20170001/d5a547e7038e79820c75fd8dea102c42">Click here</a>
@@ -22,6 +31,6 @@
             <a href="https://www.csesoc.unsw.edu.au/finance/20170004/60effef889c36d1451441a21a2cfce1a">Click here</a>
         {% endif %}
     {% endif %}
-    for payment invoice details.</h3>
+    to pay now</h1>
     <p><a href="{% url "app.camp.campattendees.views.signup" %}">Return to form</a></p>
 {% endblock %}
