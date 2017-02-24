@@ -57,7 +57,7 @@ def getFlow(full_path):
 def getGoogleRedirect(full_path):
   return getFlow(full_path).step1_get_authorize_url()
 
-bdef getTimetable(zUser, zPass, semester):
+def getTimetable(zUser, zPass, semester):
   jar = cookielib.CookieJar()
   opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(jar))
   # CSRF Token or something. We need to steal it from SSO
