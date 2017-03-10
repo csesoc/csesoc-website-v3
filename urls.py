@@ -25,7 +25,7 @@ urlpatterns = patterns("",
     url(r'^timetable-importer/?$', 'app.timetable.views.show'),
 
     # Teams
-    url(r'^teams/join/?$', 'app.teams.views.mailinglist'),
+    #url(r'^teams/join/?$', 'app.teams.views.mailinglist'),
 
     # Camp attendee applications    
     url(r'^camp/signup/$', 'app.camp.campattendees.views.signup'),

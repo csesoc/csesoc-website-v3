@@ -37,8 +37,8 @@ def signup(request):
    if request.user.is_authenticated():
       # redirect to the 'signups have closed' page if they haven't applied yet
       student = Application.objects.filter(student_number=request.user.username)
-      #if len(student) == 0:
-      #   return redirect('/first-year-camp/signup')
+      if len(student) == 0:
+         return redirect('/first-year-camp/signup')
 
       this_year = datetime.date.today().year
       if request.method == 'POST': # form submitted
@@ -53,7 +53,7 @@ def signup(request):
          form = ApplicationForm(request.POST, request.FILES, instance=student) # form bound to POST data
          form.clean_file(request.FILES)
          early_bird = False
-         if datetime.datetime.now() < datetime.datetime(2017, 02, 27, 23, 59, 00):
+         if datetime.datetime.now() < datetime.datetime(2017, 02, 26, 23, 59, 00):
              early_bird = True
          if form.is_valid():
             form.save()
@@ -64,6 +64,10 @@ def signup(request):
              appl = Application(year=this_year, student_number = request.user.username)
              form = ApplicationForm(instance=appl) # unbound form
          else:
+             # don't give student the signup form if we've marked their application as deleted
+             if student[0].payment_status == 'D':
+                 messages.error(request, "Your application is marked as deleted. If you wish to rejoin the waiting list or believe this is a mistake, contact csesoc.social.head@cse.unsw.edu.au")
+                 return redirect('/first-year-camp/')
              form = ApplicationForm(instance=student[0]) # unbound form
       return render_to_response('camp/signup.html', {'form' : form}, context_instance=RequestContext(request))
    else:
