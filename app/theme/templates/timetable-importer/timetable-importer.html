@@ -18,85 +18,10 @@
         <div id="content-bgtop">
           <div id="content-bgbtm">
             <div class="post entry">
-              <p>Ok. So the idea here is to throw your uni timetable into a google calendar.
-              You can then share the calendar with friends. If you have an iOS device/iCal,
-              you can choose multiple calendars you would like to sync <a href="https://www.google.com/calendar/syncselect?pli=1">here</a>.
-              The Android Calendar app should work out of the box.
+              <p>Sorry.
+              <br> The timetable importer is currently down, and the dev team is hard at work to get it up and running, until then it is possible to use the <a href="https://my.unsw.edu.au/utils/pttx/home.xml">UNSW timetable importer</a> to get a calendar you can use.
+              <br> If you would like to help keep things like this running then why not <a href= "https://www.csesoc.unsw.edu.au/teams/dev/">join the dev team</a>?
               </p>
-
-              <h4>NOTES</h4>
-
-              <ul>
-                <li>This works pretty slowly so give the page time to fully load afterwards (it will say success once it's done)</li>
-                <li>You have to enable google calendar. That means just access it at least once</li>
-                <li>Sometimes this will fail due to dodgy google api, so try a couple of times and then let us know</li>
-              </ul>
-            </div>
-            <hr/>
-            <div class="post" id="entry">
-              <h3>Timetable Source</h3><br />
-
-              <div class="control-group">
-                <div class="controls">
-                  <label class="radio">
-                    <input type="radio" name="input-type" id="login-radio" value="use-login" checked="">
-                    myUnsw Login
-                  </label>
-                  <label class="radio">
-                    <input type="radio" name="input-type" id="login-radio" value="use-source">
-                    Paste Source
-                  </label>
-                </div>
-              </div>
-
-              <table width="100%">
-                <tbody>
-                  <tr>
-                    <td>
-                      <div id="use-source" style="display:none">
-                        <textarea class="input-xlarge" name="source" id="source" rows="10"></textarea>
-                        <div class="error"> Source is empty </div>
-
-                        <h4 id="source-help">Help</h4>
-
-                        <p id="source-help-text">Paste the source of your Class Timetable page from My UNSW (should be <a href="https://my.unsw.edu.au/active/studentTimetable/timetable.xml">here</a>, then click click Source or Page Source from the View menu up the top). You can use this to do timetables that aren't the current one. Only handles main semesters though (I think).
-                        </p>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>
-                      <div id="use-login">
-                        <table>
-                          <tbody>
-                            <tr>
-                              <td>
-                                <p>zUser:</p>
-                              </td>
-
-                              <td><input id="zUser" type="text" name="zUser" /></td>
-                            </tr>
-
-                            <tr>
-                              <td>
-                                <p>zPass:</p>
-                              </td>
-
-                              <td><input id="zPass" type="password" name="zPass" /></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <div class="error"> Enter myUnsw information </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <input type="hidden" name="code" value="{{auth_code}}">
-              <div id="submit-area">
-                <input id="import-button" class="btn btn-primary" type="submit" value="Go!">
-                <br/>
               </div>
             </div>
           </div>
