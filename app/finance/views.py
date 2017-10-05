@@ -54,10 +54,10 @@ def invoice_detail(request, invoice_number, hash):
             'invoice': str(uuid.uuid1()),
 
             # The URL they will return to
-            'return_url': "http://www.csesoc.unsw.edu.au/finance/thanks/" + product.invoice_number,
+            'return_url': "https://www.csesoc.unsw.edu.au/finance/thanks/" + product.invoice_number,
 
             # The URL they will cancel to
-            'cancel_return': "/finance/" + product.invoice_number + "/" + str(product.hash),
+            'cancel_return': "https://www.csesoc.unsw.edu.au/finance/" + product.invoice_number + "/" + str(product.hash),
             }
 
     if product.students_login:
