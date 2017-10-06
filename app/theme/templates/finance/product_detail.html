@@ -98,7 +98,7 @@ function togglepaypal(){
                     <script
                       src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                       data-key="{{ stripe_pkey }}"
-                      data-amount="{{ stripe_cents }}"
+                      data-amount={{ stripe_cents }}
                       data-name="CSESoc"
                       data-description="{{ item_name }}"
                       data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
@@ -129,7 +129,7 @@ function togglepaypal(){
                         <script
                           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                           data-key="{{ stripe_pkey }}"
-                          data-amount="{{ stripedata_price }}"
+                          data-amount={{ stripe_cents }}
                           data-name="CSESoc"
                           data-description="{{ item_name }}"
                           data-image="https://stripe.com/img/documentation/checkout/marketplace.png"

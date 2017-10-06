@@ -2,11 +2,11 @@
 {% block meta_title %}{{ title }}{% endblock %}
 {% block main %}
 {% if pay_success %}
-<h1>Payment successful!</h1>
-<p>Your card has been charged and should appear on your statement as "STRIPE INC".</p>
+<h1>&#10004; Payment successful!</h1>
+<p>Your card has been charged and should appear on your statement as &quot;CSESOC&quot; or &quot;STRIPE INC&quot;.</p>
 <p>You will receive an email within the next 24-48 hours confirming your payment.</p>
 {% else %}
-<h1>Payment failed</h1>
+<h1>&#10060; Payment failed</h1>
 <p>{{ fail_message }}</p>
 {% endif %}
 {% endblock %}
