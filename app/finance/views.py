@@ -97,7 +97,8 @@ def invoice_payment(request, invoice_number, hash):
             amount=stripe_cents,
             currency='aud',
             source=token,
-            description=item_name
+            description=item_name,
+            receipt_email=request.POST.get("stripeEmail")
         )
         pay_success = True
     except stripe.error.CardError as e:
