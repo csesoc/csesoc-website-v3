@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block meta_title %}{{ title }}{% endblock %}
+{% block main %}
+{% if pay_success %}
+<h1>Payment successful!</h1>
+<p>You should shortly receive an email confirming your payment.</p>
+{% else %}
+<h1>Payment failed</h1>
+<p>{{ fail_message }}</p>
+{% endif %}
+{% endblock %}

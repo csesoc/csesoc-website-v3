@@ -49,6 +49,7 @@ function togglepaypal(){
 
 </script>
 {% endblock %}
+{% block meta_title %}{{ title }}{% endblock %}
 {% block main %}
 <div class='well'>
     {% if product.students_login %}
@@ -84,16 +85,29 @@ function togglepaypal(){
                     <span style='color:red;'><em>Please ensure your CSE username or UNSW Student Number (<strong>{{user.username}}</strong>) is present in the payment description.</em></span>
                 </td></tr>
             {% endif %}
-            <tr><td><h3><a href='javascript:togglepaypal();'>Paypal or Credit Card</a></h3></td><td><h3 id="paypal-price"> {{paypal_price }}</h3></td></tr>
+            <tr><td><h3><a href='javascript:togglepaypal();'>Credit/Debit Card</a></h3></td><td><h3 id="paypal-price"> {{paypal_price }}</h3></td></tr>
             <tr class='paypal'><td colspan="2">
-                <em>Note: Paying by credit card or PayPal incurs a {{ paypal_display_percentage }}% fee, as shown above.</em>
+                <em>Note: Paying by credit or debit card incurs a {{ paypal_display_percentage }} fee, as shown above.</em>
                 <br/>
                 {% if product.students_login %}
                     <span style='color:red;'><em>Please ensure your student number is <strong>{{user.username}}</strong> before you continue.</em></span>
                 {% endif %}
+                <br/>
+                <form action="/finance/{{ invoice_number }}/{{ hash }}/payment" method="POST">
+                    {% csrf_token %}
+                    <script
+                      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="{{ stripe_pkey }}"
+                      data-amount="{{ stripe_cents }}"
+                      data-name="CSESoc"
+                      data-description="{{ item_name }}"
+                      data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                      data-locale="auto"
+                      data-currency="aud"
+                      data-allowRememberMe="false">
+                    </script>
+                </form> 
             </td></tr>
-            <tr class='paypal'><td colspan="2" style='text-align:center;'>{{ form.render }}</td></tr>
-
         </table>
     {% else %}
     <div id="paypal_hidden" style="display: none;"></div>
@@ -107,16 +121,23 @@ function togglepaypal(){
             {% endif %}
             
             <tr><td class='lhs'>Discount</td><td class='price'>{{discount}}</td></tr>
-            <tr><td><h3>Paypal Only</h3></td><td><h3 id="paypal-price"> {{paypal_price }}</h3></td></tr>
-            <tr class='paypal'><td colspan="2">
-                <br/>
-            </td></tr>
-            <tr class='paypal'><td colspan="2" style='text-align:center;'>{{ form.render }}</td></tr>
-            <tr>
-                <td>
-                    <p>Preferred method is PayPal. You can use your credit/debit card.</p>
-                    <p>If you are paying by cash, email <a href="mailto:csesoc@cse.unsw.edu.au?Subject=CSESoc%20Hoodie%20preorder" target="_top">csesoc@cse.unsw.edu.au</a> to organise when you when you want to pay.
-                    </p>
+            <tr><td><h3>Credit/Debit Card Only</h3></td><td><h3 id="paypal-price"> {{ paypal_price }}</h3></td></tr>
+            <tr class='paypal'>
+                <td colspan="2" style='text-align:center;'>
+                    <form action="/finance/{{ invoice_number }}/{{ hash }}/payment" method="POST">
+                        {% csrf_token %}
+                        <script
+                          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                          data-key="{{ stripe_pkey }}"
+                          data-amount="{{ stripedata_price }}"
+                          data-name="CSESoc"
+                          data-description="{{ item_name }}"
+                          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                          data-locale="auto"
+                          data-currency="aud"
+                          data-allowRememberMe="false">
+                        </script>
+                    </form> 
                 </td>
             </tr>
         </table>
