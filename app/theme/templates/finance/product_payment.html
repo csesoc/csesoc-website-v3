@@ -3,7 +3,8 @@
 {% block main %}
 {% if pay_success %}
 <h1>Payment successful!</h1>
-<p>You should shortly receive an email confirming your payment.</p>
+<p>Your card has been charged and should appear on your statement as "STRIPE INC".</p>
+<p>You will receive an email within the next 24-48 hours confirming your payment.</p>
 {% else %}
 <h1>Payment failed</h1>
 <p>{{ fail_message }}</p>
