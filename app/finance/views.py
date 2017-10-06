@@ -23,10 +23,10 @@ def invoice_detail(request, invoice_number, hash):
     price = product.price - product.discount
 
     # Stripe charges 1.75% + 30c from the total amount you receive
-    paypal_surcharge = 0.0175
-    paypal_price = round(float(price) / (1 - paypal_surcharge) + (0.30 * (1 + paypal_surcharge)), 2)
-    paypal_display_percentage = "1.75% + 30c"
-    stripe_cents = int(round(paypal_price * 100, 0))
+    stripe_surcharge = 0.0175
+    stripe_price = round(float(price) / (1 - stripe_surcharge) + (0.30 * (1 + stripe_surcharge)), 2)
+    stripe_display_percentage = "1.75% + 30c"
+    stripe_cents = int(round(stripe_price * 100, 0))
 
     # Add the CSE login to the item name we send to paypal
     if product.students_login:
@@ -50,10 +50,10 @@ def invoice_detail(request, invoice_number, hash):
         'price' : "%.2f"%product.price,
         'stripe_cents' : stripe_cents,
         'discount': "($%.2f)"%product.discount,
-        'paypal_surcharge': paypal_surcharge,
-        'paypal_display_percentage': paypal_display_percentage,
+        'stripe_surcharge': stripe_surcharge,
+        'stripe_display_percentage': stripe_display_percentage,
         'total_price' : "$%.2f"%(price),
-        'paypal_price' : "$%.2f"%(paypal_price),
+        'stripe_price' : "$%.2f"%(stripe_price),
         'max_quantity' : product.max_quantity,
         'dd_description': dd_description,
         'title' : title,

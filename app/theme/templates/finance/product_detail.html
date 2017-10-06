@@ -12,7 +12,7 @@ $(document).ready(function(){
         desired_quantity = $('#desired_quantity').val();
         max_quantity = {{ max_quantity }};
         price = {{ price }};
-        paypal_surcharge = ({{ paypal_surcharge }});
+        paypal_surcharge = ({{ stripe_surcharge }});
         if (desired_quantity > max_quantity){
             $('#desired_quantity_group').addClass('error');
             desired_quantity = max_quantity;
@@ -85,9 +85,9 @@ function togglepaypal(){
                     <span style='color:red;'><em>Please ensure your CSE username or UNSW Student Number (<strong>{{user.username}}</strong>) is present in the payment description.</em></span>
                 </td></tr>
             {% endif %}
-            <tr><td><h3><a href='javascript:togglepaypal();'>Credit/Debit Card</a></h3></td><td><h3 id="paypal-price"> {{paypal_price }}</h3></td></tr>
+            <tr><td><h3><a href='javascript:togglepaypal();'>Credit/Debit Card</a></h3></td><td><h3 id="paypal-price"> {{ stripe_price }}</h3></td></tr>
             <tr class='paypal'><td colspan="2">
-                <em>Note: Paying by credit or debit card incurs a {{ paypal_display_percentage }} fee, as shown above.</em>
+                <em>Note: Paying by credit or debit card incurs a {{ stripe_display_percentage }} fee, as shown above.</em>
                 <br/>
                 {% if product.students_login %}
                     <span style='color:red;'><em>Please ensure your student number is <strong>{{user.username}}</strong> before you continue.</em></span>
@@ -112,7 +112,7 @@ function togglepaypal(){
     {% else %}
     <div id="paypal_hidden" style="display: none;"></div>
         <table onload="$(".paypal").show();">
-            <tr><td class='lhs'>{{product.title}}</td><td class='price'>{{paypal_price}}</td></tr>
+            <tr><td class='lhs'>{{product.title}}</td><td class='price'>{{ stripe_price }}</td></tr>
             {% if product.max_quantity > 1 %}
                 <tr><td class='lhs'>Quantity : </td><td id="desired_quantity_group" class='price control-group'><input id="desired_quantity" name="desired_quantity" value="1"><span class="help-inline">Maximum of {{max_quantity}}</span></td></tr>
             {% endif %}
@@ -121,7 +121,7 @@ function togglepaypal(){
             {% endif %}
             
             <tr><td class='lhs'>Discount</td><td class='price'>{{discount}}</td></tr>
-            <tr><td><h3>Credit/Debit Card Only</h3></td><td><h3 id="paypal-price"> {{ paypal_price }}</h3></td></tr>
+            <tr><td><h3>Credit/Debit Card Only</h3></td><td><h3 id="paypal-price"> {{ stripe_price }}</h3></td></tr>
             <tr class='paypal'>
                 <td colspan="2" style='text-align:center;'>
                     <form action="/finance/{{ invoice_number }}/{{ hash }}/payment" method="POST">
