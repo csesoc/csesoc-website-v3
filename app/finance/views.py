@@ -128,5 +128,6 @@ def invoice_payment(request, invoice_number, hash):
     return render_to_response('finance/product_payment.html', {
         'fail_message' : fail_message,
         'pay_success' : pay_success,
+        'stripe_price' : stripe_price,
         'title' : "Payment"
     }, RequestContext(request))
