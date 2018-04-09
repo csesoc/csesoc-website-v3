@@ -1,7 +1,0 @@
-*.pyc
-*.pyo
-.DS_Store
-.coverage
-local_settings.py
-app/theme/static/media/
-*.db

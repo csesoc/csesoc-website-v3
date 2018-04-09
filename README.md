@@ -1,47 +1,67 @@
-csesoc-website-v2
-=================
-## Developer setup for Ubuntu
-###Core packages
+# csesoc-website-v2
+
+## Developing
+
+#### Dependencies
+You will need
+
+- OpenLDAP
+- [pipenv](https://github.com/pypa/pipenv). Pipenv takes care of installing and managing Python dependencies.
+
+#### Pre-Running
+**Set Envvars**
+You will need to set the environment vars for local development
+
+```
+cp .env.example.sh .env.sh
+vim .env.sh
+
+# Add envvars to the local environment
+source .env.sh
+```
+
+**Initialize the DB**
+The database for the website is stored in `data/soc-website.db` so we only need to run syncdb
 ```bash
-$ sudo apt-get install git python-virtualenv python-pip sqlite3 python-ldap libsasl2-dev libldap2-dev python-dev libssl-dev
+$ sqlite3 data/soc-website.db < initial.sql
 ```
 
-###Setting up virtualenv
-This is only necessay if you work on a lot of Python projects. It's mainly to deal with package dependencies. It's not completely necessary, but its a good habit.
-```bash
-$ virtualenv <environment_name>
-$ . <environment_name>/bin/activate
+#### Running
 ```
-You'll see in your terminal that it has <environment_name> at the start of the line
-
-### Installing packages
-Run the following
-```bash
-$ git clone git@github.com:csesoc/csesoc-website-v2.git
-$ cd csesoc-website-v2
-$ pip install -r requirements.txt
+pipenv run python manage.py runserver
 ```
 
-### Database Setup
-The database for the website is stored in soc-website.db so we only need to run syncdb
-```bash
-$ sqlite3 soc-website.db < initial.sql
+## Building & Pushing a New Container
+```
+# Build the container
+docker build -t csesoc/soc-website-v2
+
+# Push the container
+docker push csesoc/soc-website-v2
 ```
 
-### Local settings
-To serve CSS, you need to make a local settings file. Create a file called local_settings.py in the root directory of the project with the following two lines:
-```python
-STATIC_ROOT = '/path/to/csesoc-website-v2/app/theme/static'
-DEBUG=True
+## Deployment
+This project is setup for deployment in a Docker Container.
+
+### Volumes:
+ - `/app/data`: Data directory for the app. Contains media & sqlite db
+
+### Ports:
+The container exposes the server on port 8080.
+
+### Environment:
+You need to specify the environment vars outlined in `.env.example.sh`
 
 ```
-
-### Running the server
-To start the server, run
-```bash
-$ python manage.py runserver
+# Run the container
+docker run --rm -it --name soc-website -p 8080:8080 \
+  -v $PWD/data:/app/data \
+  -e SECRET_KEY="" \
+  -e NEVERCACHE_KEY="" \
+  -e STRIPE_PKEY="" \
+  -e STRIPE_SKEY="" \
+  csesoc/soc-website-v2
 ```
-and go to [localhost:8000](localhost:8000) in your browser. Enjoy!
 
 ## Using the CMS front end
 
