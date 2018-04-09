@@ -33,14 +33,12 @@ SHIRT_CHOICES = (
     ('L', 'Unisex - Large'),
     ('XL', 'Unisex - Extra Large'),
     ('XXL', 'Unisex - Extra Extra Large'),
-    """ Only unisex sizes in 2018
     ('6', 'Ladies - 6'),
     ('8', 'Ladies - 8'),
     ('10', 'Ladies - 10'),
     ('12', 'Ladies - 12'),
     ('14', 'Ladies - 14'),
     ('16', 'Ladies - 16'),
-    """
     )
 
 
