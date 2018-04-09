@@ -4,10 +4,14 @@ WORKDIR /app
 VOLUME /data
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y libldap2-dev libsasl2-dev slapd ldap-utils
+RUN apt-get update \
+      && apt-get install -y libldap2-dev libsasl2-dev slapd ldap-utils \
+      && pip install pipenv
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies into their own layer so they are cached between code changes
+COPY Pipfile Pipfile.lock ./
+RUN pipenv install --system --deploy
+
 COPY . .
 
 EXPOSE 8080
