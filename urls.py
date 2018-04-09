@@ -3,7 +3,7 @@ from django.contrib import admin
 
 from mezzanine.core.views import direct_to_template
 
-import local_settings
+import settings
 import mezzanine_pagedown.urls
 
 admin.autodiscover()
@@ -27,7 +27,7 @@ urlpatterns = patterns("",
     # Teams
     #url(r'^teams/join/?$', 'app.teams.views.mailinglist'),
 
-    # Camp attendee applications    
+    # Camp attendee applications
     url(r'^camp/signup/$', 'app.camp.campattendees.views.signup'),
     url(r'^camp/music/?$', 'app.camp.campattendees.views.music'),
 
@@ -44,10 +44,17 @@ urlpatterns = patterns("",
 
     ("^pagedown/", include(mezzanine_pagedown.urls)),
 
+    (r'^static/media/(?P<path>.*)$',
+    'django.views.static.serve',
+    {'document_root':
+     settings.MEDIA_ROOT.rstrip('/')
+    }
+    ),
+
     (r'^static/(?P<path>.*)$',
      'django.views.static.serve',
      {'document_root':
-         local_settings.STATIC_ROOT.rstrip('/')
+         settings.STATIC_ROOT.rstrip('/')
      }
     ),
 

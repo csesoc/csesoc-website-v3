@@ -6,4 +6,6 @@ local_settings.py
 app/theme/static/media/
 *.db
 virtualenv/*
-
+data/
+.env.sh
+.idea/
