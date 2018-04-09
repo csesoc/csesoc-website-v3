@@ -205,11 +205,6 @@ PROJECT_DIRNAME = PROJECT_ROOT.split(os.sep)[-1]
 # project specific.
 CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_DIRNAME
 
-# Make these unique, and don't share it with anybody.
-SECRET_KEY = "bb144f82-39a0-4637-ab9c-c60c80a8d294b45fb1cc-bbb8-4c9e-a87a-3f6ad80acbdfc1841843-5187-44c6-b9a9-c5a05927e21b"
-NEVERCACHE_KEY = "f57f7b5c-bb1c-4302-bef5-26b6b3b43f2de9495caf-1f02-47ef-addb-48ad59feab612166798a-8399-4b7a-9ada-a1eb07eebb6f"
-
-
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = "/static/"
@@ -247,11 +242,12 @@ INSTALLED_APPS = (
     'app.theme',
     'app.sponsors',
     'app.auth',
-    'app.teams',
+    #'app.teams',
     'app.timetable',
     'app.camp.campattendees',
     'app.finance',
     'app.merch',
+    'app.soctail',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

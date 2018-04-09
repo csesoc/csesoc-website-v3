@@ -25,7 +25,7 @@ urlpatterns = patterns("",
     url(r'^timetable-importer/?$', 'app.timetable.views.show'),
 
     # Teams
-    url(r'^teams/join/?$', 'app.teams.views.mailinglist'),
+    #url(r'^teams/join/?$', 'app.teams.views.mailinglist'),
 
     # Camp attendee applications    
     url(r'^camp/signup/$', 'app.camp.campattendees.views.signup'),
@@ -34,6 +34,7 @@ urlpatterns = patterns("",
     # Finance
     url(r'^finance/thanks/(?P<invoice_number>[0-9]{8})/?$', 'app.finance.views.invoice_thanks'),
     url(r'^finance/(?P<invoice_number>[0-9]{8})/(?P<hash>[0-9a-zA-Z]+)/?$', 'app.finance.views.invoice_detail'),
+    url(r'^finance/(?P<invoice_number>[0-9]{8})/(?P<hash>[0-9a-zA-Z]+)/payment/?$', 'app.finance.views.invoice_payment'),
 
     # Merch
     url(r'^merch/hoodies', 'app.merch.views.hoodies'),
