@@ -1,7 +1,7 @@
 FROM python:2
 
 WORKDIR /app
-VOLUME /data
+VOLUME /app/data
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
