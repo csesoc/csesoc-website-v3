@@ -1,10 +1,9 @@
+import mezzanine_pagedown.urls
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-
 from mezzanine.core.views import direct_to_template
 
 import settings
-import mezzanine_pagedown.urls
 
 admin.autodiscover()
 
@@ -12,7 +11,8 @@ admin.autodiscover()
 # You can also change the ``home`` view to add your own functionality
 # to the project's homepage.
 
-urlpatterns = patterns("",
+urlpatterns = patterns(
+    "",
 
     # Login for zIDs, NOT admin. This is only a temporary solution
     # because later, CSESoc's execs will be given admin permission
@@ -25,7 +25,7 @@ urlpatterns = patterns("",
     url(r'^timetable-importer/?$', 'app.timetable.views.show'),
 
     # Teams
-    #url(r'^teams/join/?$', 'app.teams.views.mailinglist'),
+    # url(r'^teams/join/?$', 'app.teams.views.mailinglist'),
 
     # Camp attendee applications
     url(r'^camp/signup/$', 'app.camp.campattendees.views.signup'),
@@ -34,7 +34,8 @@ urlpatterns = patterns("",
     # Finance
     url(r'^finance/thanks/(?P<invoice_number>[0-9]{8})/?$', 'app.finance.views.invoice_thanks'),
     url(r'^finance/(?P<invoice_number>[0-9]{8})/(?P<hash>[0-9a-zA-Z]+)/?$', 'app.finance.views.invoice_detail'),
-    url(r'^finance/(?P<invoice_number>[0-9]{8})/(?P<hash>[0-9a-zA-Z]+)/payment/?$', 'app.finance.views.invoice_payment'),
+    url(r'^finance/(?P<invoice_number>[0-9]{8})/(?P<hash>[0-9a-zA-Z]+)/payment/?$',
+        'app.finance.views.invoice_payment'),
 
     # Merch
     url(r'^merch/hoodies', 'app.merch.views.hoodies'),
@@ -44,19 +45,13 @@ urlpatterns = patterns("",
 
     ("^pagedown/", include(mezzanine_pagedown.urls)),
 
-    (r'^static/media/(?P<path>.*)$',
-    'django.views.static.serve',
-    {'document_root':
-     settings.MEDIA_ROOT.rstrip('/')
-    }
-    ),
+    (r'^(static/)?media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT.rstrip('/')
+    }),
 
-    (r'^static/(?P<path>.*)$',
-     'django.views.static.serve',
-     {'document_root':
-         settings.STATIC_ROOT.rstrip('/')
-     }
-    ),
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.STATIC_ROOT.rstrip('/')
+    }),
 
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
@@ -72,7 +67,7 @@ urlpatterns = patterns("",
     # one homepage pattern, so if you use a different one, comment this
     # one out.
 
-    #url("^$", direct_to_template, {"template": "index.html"}, name="home"),
+    # url("^$", direct_to_template, {"template": "index.html"}, name="home"),
 
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------
