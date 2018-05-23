@@ -203,10 +203,6 @@ PROJECT_DIRNAME = PROJECT_ROOT.split(os.sep)[-1]
 # project specific.
 CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_DIRNAME
 
-# Make these unique, and don't share it with anybody.
-SECRET_KEY = os.environ['SECRET_KEY']
-NEVERCACHE_KEY = os.environ['NEVERCACHE_KEY']
-
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = "/static/"
@@ -335,11 +331,6 @@ OPTIONAL_APPS = (
 )
 
 DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
-
-# Stripe Keys for CC payment processing. Publishable key is designed to be given to users, secret key is.. well.. secret.
-# Live keys
-STRIPE_PKEY = os.environ['STRIPE_PKEY']
-STRIPE_SKEY = os.environ['STRIPE_SKEY']
 
 ####################
 # DYNAMIC SETTINGS #
